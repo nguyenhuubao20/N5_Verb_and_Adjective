@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riki N5 - Luyện Chia Thể Động Từ & Tính Từ Tiếng Nhật (Full 100% N5)</title>
+  
+  <!-- Google Fonts: Inter & Noto Sans JP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Wanakana CDN for Romaji to Hiragana conversion -->
+  <script src="https://unpkg.com/wanakana@5.3.1/wanakana.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            riki: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              300: '#fda4af',
+              400: '#fb7185',
+              500: '#f43f5e',
+              600: '#e11d48', // Riki Primary Red
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+              dark: '#0f172a',
+              gold: '#f59e0b'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            jp: ['"Noto Sans JP"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+    }
+    .jp-font {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    .riki-gradient {
+      background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+    }
+    .riki-card-glow {
+      box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.1), 0 8px 10px -6px rgba(225, 29, 72, 0.05);
+    }
+  </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col antialiased selection:bg-rose-100 selection:text-rose-700">
+
+  <!-- TOP HEADER (Riki Style Red Banner) -->
+  <header class="riki-gradient text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo & Brand -->
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('flashcard')">
+          <div class="w-10 h-10 rounded-xl bg-white text-rose-600 flex items-center justify-center font-black text-xl shadow-md font-jp">
+            力
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="font-extrabold text-lg tracking-tight">RIKI NIHONGO</span>
+              <span class="bg-amber-400 text-rose-950 text-[11px] font-black px-2 py-0.5 rounded-full uppercase shadow-sm">N5 Master 100%</span>
+            </div>
+            <p class="text-xs text-rose-100 font-medium">Trọn Bộ Động Từ & Tính Từ Minna no Nihongo</p>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="hidden md:flex items-center space-x-1 bg-rose-800/60 p-1.5 rounded-xl border border-rose-600/50 backdrop-blur-sm">
+          <button onclick="switchTab('flashcard')" id="nav-flashcard" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 bg-white text-rose-700 shadow-sm">
+            <i data-lucide="layers" class="w-4 h-4"></i>
+            <span>Flashcard</span>
+          </button>
+          <button onclick="switchTab('input-quiz')" id="nav-input-quiz" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 text-rose-100 hover:text-white hover:bg-rose-700/50">
+            <i data-lucide="keyboard" class="w-4 h-4"></i>
+            <span>Luyện Gõ</span>
+          </button>
+          <button onclick="switchTab('multi-quiz')" id="nav-multi-quiz" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 text-rose-100 hover:text-white hover:bg-rose-700/50">
+            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+            <span>Trắc Nghiệm</span>
+          </button>
+          <button onclick="switchTab('dictionary')" id="nav-dictionary" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 text-rose-100 hover:text-white hover:bg-rose-700/50">
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+            <span>Tra Cứu (<span id="nav-total-count">0</span>)</span>
+          </button>
+          <button onclick="switchTab('rules')" id="nav-rules" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 text-rose-100 hover:text-white hover:bg-rose-700/50">
+            <i data-lucide="help-circle" class="w-4 h-4"></i>
+            <span>Quy Tắc</span>
+          </button>
+        </nav>
+
+        <!-- Right Action: Session & Audio -->
+        <div class="flex items-center space-x-3">
+          <!-- Session Streak Badge -->
+          <div class="flex items-center space-x-1.5 bg-rose-800/80 px-3 py-1.5 rounded-lg border border-rose-500/40 text-xs font-bold text-amber-300" title="Điểm chuỗi học liên tục">
+            <i data-lucide="flame" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+            <span id="streak-count">0</span>
+            <span class="text-rose-200 font-normal hidden sm:inline">Streak</span>
+          </div>
+          <!-- Reset Session -->
+          <button onclick="resetSession()" class="p-2 rounded-lg bg-rose-700/60 hover:bg-rose-700 text-rose-100 transition" title="Làm mới phiên học">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE BOTTOM NAV BAR -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-xl z-50 flex justify-around p-2">
+    <button onclick="switchTab('flashcard')" id="mob-nav-flashcard" class="mob-nav-btn flex flex-col items-center py-1 px-2 rounded-lg text-rose-600 font-bold text-xs">
+      <i data-lucide="layers" class="w-5 h-5"></i>
+      <span class="mt-0.5">Thẻ</span>
+    </button>
+    <button onclick="switchTab('input-quiz')" id="mob-nav-input-quiz" class="mob-nav-btn flex flex-col items-center py-1 px-2 rounded-lg text-slate-500 font-medium text-xs">
+      <i data-lucide="keyboard" class="w-5 h-5"></i>
+      <span class="mt-0.5">Gõ từ</span>
+    </button>
+    <button onclick="switchTab('multi-quiz')" id="mob-nav-multi-quiz" class="mob-nav-btn flex flex-col items-center py-1 px-2 rounded-lg text-slate-500 font-medium text-xs">
+      <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+      <span class="mt-0.5">Quiz</span>
+    </button>
+    <button onclick="switchTab('dictionary')" id="mob-nav-dictionary" class="mob-nav-btn flex flex-col items-center py-1 px-2 rounded-lg text-slate-500 font-medium text-xs">
+      <i data-lucide="book-open" class="w-5 h-5"></i>
+      <span class="mt-0.5">Tra cứu</span>
+    </button>
+    <button onclick="switchTab('rules')" id="mob-nav-rules" class="mob-nav-btn flex flex-col items-center py-1 px-2 rounded-lg text-slate-500 font-medium text-xs">
+      <i data-lucide="help-circle" class="w-5 h-5"></i>
+      <span class="mt-0.5">Quy tắc</span>
+    </button>
+  </div>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 mb-16 md:mb-6">
+    
+    <!-- SUBHEADER / FILTER TOOLBAR -->
+    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 mb-6 riki-card-glow">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <!-- Category Filter Pills -->
+        <div class="flex items-center flex-wrap gap-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center">
+            <i data-lucide="filter" class="w-3.5 h-3.5 mr-1"></i> Loại từ:
+          </span>
+          <button onclick="setCategoryFilter('all')" id="filter-all" class="cat-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-rose-600 text-white shadow-sm transition">Tất cả (<span id="count-all">0</span>)</button>
+          <button onclick="setCategoryFilter('verb1')" id="filter-verb1" class="cat-filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600 transition">Động từ N1 (<span id="count-verb1">0</span>)</button>
+          <button onclick="setCategoryFilter('verb2')" id="filter-verb2" class="cat-filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600 transition">Động từ N2 (<span id="count-verb2">0</span>)</button>
+          <button onclick="setCategoryFilter('verb3')" id="filter-verb3" class="cat-filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600 transition">Động từ N3 (<span id="count-verb3">0</span>)</button>
+          <button onclick="setCategoryFilter('adj_i')" id="filter-adj_i" class="cat-filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600 transition">Tính từ đuôi い (<span id="count-adj_i">0</span>)</button>
+          <button onclick="setCategoryFilter('adj_na')" id="filter-adj_na" class="cat-filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600 transition">Tính từ đuôi な (<span id="count-adj_na">0</span>)</button>
+          <button onclick="setCategoryFilter('noun')" id="filter-noun" class="cat-filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600 transition">Danh từ (<span id="count-noun">0</span>)</button>
+          <button onclick="setCategoryFilter('starred')" id="filter-starred" class="cat-filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 hover:bg-amber-100 transition flex items-center">
+            <i data-lucide="star" class="w-3.5 h-3.5 mr-1 fill-amber-400 text-amber-500"></i> Yêu thích (<span id="count-starred">0</span>)
+          </button>
+        </div>
+
+        <!-- Target Forms Filter -->
+        <div class="flex items-center space-x-2 text-xs font-medium">
+          <span class="text-slate-400">Thể mục tiêu:</span>
+          <select id="target-form-select" onchange="updateTargetForm(this.value)" class="bg-slate-50 border border-slate-300 text-slate-700 font-bold rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-rose-500 focus:outline-none">
+            <option value="random">⚡ Ngẫu nhiên tất cả thể</option>
+            <option value="te">Thể て (V-te / A-te)</option>
+            <option value="nai">Thể ない (V-nai / Phủ định)</option>
+            <option value="ru">Thể る / Từ điển (V-ru / Thường)</option>
+            <option value="ta">Thể た (V-ta / Quá khứ)</option>
+            <option value="masu">Thể ます (V-masu / Lịch sự)</option>
+            <option value="past_neg">Thể Quá khứ Phủ định</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: FLASHCARD MODE -->
+    <section id="tab-flashcard" class="tab-content">
+      <div class="max-w-2xl mx-auto">
+        <!-- Progress Bar & Status -->
+        <div class="flex items-center justify-between text-sm font-semibold text-slate-500 mb-3 px-1">
+          <div class="flex items-center space-x-2">
+            <span class="bg-rose-100 text-rose-700 px-2.5 py-0.5 rounded-full text-xs font-bold" id="card-category-badge">Động từ Nhóm 1</span>
+            <span id="card-index-info">Từ 1 / 150</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="toggleStarCurrent()" id="btn-star-current" class="text-slate-400 hover:text-amber-500 transition p-1" title="Đánh dấu yêu thích">
+              <i data-lucide="star" class="w-5 h-5"></i>
+            </button>
+            <button onclick="speakCurrentWord()" class="text-slate-500 hover:text-rose-600 transition p-1" title="Phát âm tiếng Nhật">
+              <i data-lucide="volume-2" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress Bar Line -->
+        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden mb-6">
+          <div id="flashcard-progress-bar" class="riki-gradient h-full transition-all duration-300" style="width: 5%"></div>
+        </div>
+
+        <!-- 3D Flippable Flashcard -->
+        <div class="perspective-1000 w-full min-h-[380px] cursor-pointer group" onclick="flipFlashcard()">
+          <div id="flashcard-inner" class="relative w-full h-full min-h-[380px] rounded-3xl bg-white shadow-xl border border-slate-200/80 transition-transform duration-500 transform-style-3d p-8 flex flex-col justify-between select-none">
+            
+            <!-- CARD FRONT -->
+            <div id="card-front" class="flex flex-col items-center justify-center flex-grow text-center">
+              <span class="text-xs uppercase tracking-widest font-bold text-rose-500 mb-2 bg-rose-50 px-3 py-1 rounded-full">
+                Từ Gốc (Nguyên dạng / ます)
+              </span>
+              <h2 id="card-front-jp" class="text-4xl sm:text-5xl font-black text-slate-800 font-jp mb-3">
+                たべます
+              </h2>
+              <p id="card-front-kanji" class="text-xl text-slate-500 font-jp font-medium mb-4">
+                食べます
+              </p>
+              <div class="bg-slate-50 border border-slate-100 rounded-2xl px-6 py-3 shadow-inner">
+                <span class="text-xs text-slate-400 font-semibold block uppercase">Ý nghĩa tiếng Việt</span>
+                <p id="card-front-meaning" class="text-xl font-bold text-rose-700">
+                  Ăn
+                </p>
+              </div>
+
+              <div class="mt-6 flex items-center text-xs text-slate-400 font-medium">
+                <i data-lucide="touchpad" class="w-4 h-4 mr-1.5 text-rose-400"></i>
+                Chạm hoặc click thẻ để xem bảng chia tất cả các thể
+              </div>
+            </div>
+
+            <!-- CARD BACK (Detailed Conjugation Matrix) -->
+            <div id="card-back" class="hidden flex flex-col flex-grow">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                <div>
+                  <h3 id="card-back-title" class="text-xl font-bold text-rose-700 font-jp">たべます (食べます)</h3>
+                  <p id="card-back-meaning" class="text-xs text-slate-500 font-medium">Nghĩa: Ăn</p>
+                </div>
+                <button onclick="event.stopPropagation(); speakCurrentWord();" class="p-2 rounded-full bg-rose-50 text-rose-600 hover:bg-rose-100 transition">
+                  <i data-lucide="volume-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <!-- Conjugation Grid Table -->
+              <div id="card-back-grid" class="grid grid-cols-2 gap-3 flex-grow text-sm">
+                <!-- Dynamically populated -->
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                <span id="card-back-rule-tip" class="font-medium text-slate-600">Quy tắc: Nhóm 2 bỏ ます thêm て/ない/る/た</span>
+                <span class="text-rose-500 font-semibold">Lật lại ↺</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Flashcard Controls -->
+        <div class="flex items-center justify-between mt-6 gap-3">
+          <button onclick="prevCard()" class="flex-1 py-3 px-4 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold shadow-sm transition flex items-center justify-center space-x-2">
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            <span>Trước</span>
+          </button>
+          
+          <button onclick="flipFlashcard()" class="flex-1 py-3 px-4 rounded-xl bg-rose-50 border border-rose-200 hover:bg-rose-100 text-rose-700 font-bold shadow-sm transition flex items-center justify-center space-x-2">
+            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+            <span>Lật thẻ (Space)</span>
+          </button>
+
+          <button onclick="nextCard()" class="flex-1 py-3 px-4 rounded-xl riki-gradient hover:opacity-95 text-white font-bold shadow-md transition flex items-center justify-center space-x-2">
+            <span>Tiếp theo</span>
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Quick Keyboard Helper -->
+        <p class="text-center text-xs text-slate-400 mt-4">
+          Phím tắt: <kbd class="px-2 py-0.5 bg-slate-200 rounded text-slate-700">←</kbd> Trước | <kbd class="px-2 py-0.5 bg-slate-200 rounded text-slate-700">Space</kbd> Lật | <kbd class="px-2 py-0.5 bg-slate-200 rounded text-slate-700">→</kbd> Tiếp
+        </p>
+      </div>
+    </section>
+
+    <!-- TAB 2: INPUT DRILL QUIZ -->
+    <section id="tab-input-quiz" class="tab-content hidden">
+      <div class="max-w-2xl mx-auto">
+        
+        <!-- Drill Header Card -->
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200/80 p-6 sm:p-8 mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full uppercase" id="drill-category-badge">
+              Động từ Nhóm 1
+            </span>
+            <div class="text-xs font-semibold text-slate-400 flex items-center space-x-2">
+              <span>Đúng: <strong id="drill-score-correct" class="text-emerald-600">0</strong></span>
+              <span>•</span>
+              <span>Sai: <strong id="drill-score-wrong" class="text-rose-600">0</strong></span>
+            </div>
+          </div>
+
+          <!-- Prompt Question -->
+          <div class="text-center my-6">
+            <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">Hãy chia từ sau sang <span id="drill-target-form-name" class="text-rose-600 font-black text-base underline decoration-rose-300">Thể て (V-te)</span>:</p>
+            <h2 id="drill-question-jp" class="text-4xl sm:text-5xl font-black text-slate-800 font-jp mb-2">
+              いきます
+            </h2>
+            <p id="drill-question-kanji" class="text-lg text-slate-500 font-jp">
+              行きます (<span id="drill-question-meaning" class="text-rose-600 font-semibold">Đi</span>)
+            </p>
+          </div>
+
+          <!-- Input Form with Wanakana Romaji -> Hiragana auto-conversion -->
+          <form id="drill-form" onsubmit="submitDrillAnswer(event)" class="space-y-4">
+            <div class="relative">
+              <input 
+                type="text" 
+                id="drill-user-input" 
+                placeholder="Gõ Romaji (vd: itte) hoặc Hiragana..." 
+                autocomplete="off" 
+                autocorrect="off"
+                autocapitalize="off"
+                spellcheck="false"
+                class="w-full text-center text-2xl sm:text-3xl font-bold font-jp py-4 px-6 rounded-2xl border-2 border-slate-300 focus:border-rose-500 focus:ring-4 focus:ring-rose-100 focus:outline-none transition"
+              />
+              <button type="button" onclick="speakDrillPrompt()" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-rose-600 p-2" title="Nghe phát âm">
+                <i data-lucide="volume-2" class="w-5 h-5"></i>
+              </button>
+            </div>
+
+            <!-- Virtual Keyboard Quick Keys -->
+            <div class="flex items-center justify-center gap-1.5 flex-wrap">
+              <button type="button" onclick="insertDrillChar('っ')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-jp font-bold">っ</button>
+              <button type="button" onclick="insertDrillChar('ゃ')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-jp font-bold">ゃ</button>
+              <button type="button" onclick="insertDrillChar('ゅ')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-jp font-bold">ゅ</button>
+              <button type="button" onclick="insertDrillChar('ょ')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-jp font-bold">ょ</button>
+              <button type="button" onclick="insertDrillChar('ー')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-jp font-bold">ー</button>
+              <button type="button" onclick="toggleHint()" class="px-3 py-1 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 rounded-lg text-xs font-bold flex items-center ml-2">
+                <i data-lucide="lightbulb" class="w-3 h-3 mr-1"></i> Gợi ý
+              </button>
+            </div>
+
+            <!-- Hint Box -->
+            <div id="drill-hint-box" class="hidden p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 font-medium">
+              💡 Gợi ý quy tắc: <span id="drill-hint-text"></span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-3 pt-2">
+              <button type="submit" id="btn-drill-submit" class="flex-1 py-3.5 px-6 rounded-2xl riki-gradient text-white font-bold text-lg shadow-lg hover:opacity-95 transition flex items-center justify-center space-x-2">
+                <span>Kiểm tra đáp án</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </button>
+              <button type="button" onclick="skipDrillQuestion()" class="py-3.5 px-5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold transition">
+                Bỏ qua
+              </button>
+            </div>
+          </form>
+
+          <!-- Result Feedback Card -->
+          <div id="drill-feedback" class="hidden mt-6 p-4 rounded-2xl transition-all">
+            <div class="flex items-start space-x-3">
+              <div id="drill-feedback-icon" class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"></div>
+              <div class="flex-grow">
+                <h4 id="drill-feedback-title" class="font-bold text-base"></h4>
+                <p id="drill-feedback-detail" class="text-sm mt-1"></p>
+                <div id="drill-feedback-all-forms" class="mt-3 pt-3 border-t border-slate-200/60 grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-jp">
+                  <!-- All conjugations shown upon answering -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 3: MULTIPLE CHOICE QUIZ -->
+    <section id="tab-multi-quiz" class="tab-content hidden">
+      <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200/80 p-6 sm:p-8">
+          
+          <div class="flex items-center justify-between mb-4">
+            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase" id="mc-category-badge">
+              Trắc nghiệm phản xạ nhanh
+            </span>
+            <div class="text-xs font-semibold text-slate-400">
+              Câu số: <span id="mc-counter" class="text-slate-700 font-bold">1</span>
+            </div>
+          </div>
+
+          <!-- Question Content -->
+          <div class="text-center my-6">
+            <span class="text-xs uppercase font-bold text-slate-400">Thể cần chọn:</span>
+            <div id="mc-target-badge" class="inline-block bg-rose-50 text-rose-700 font-black px-4 py-1 rounded-full text-base border border-rose-200 my-2">
+              Thể ない (V-nai)
+            </div>
+            <h2 id="mc-question-jp" class="text-4xl sm:text-5xl font-black text-slate-800 font-jp mb-1">
+              かいます
+            </h2>
+            <p id="mc-question-meaning" class="text-slate-500 font-medium text-base">
+              Nghĩa: Mua (Nhóm 1)
+            </p>
+          </div>
+
+          <!-- 4 Multiple Choice Options -->
+          <div id="mc-options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-6">
+            <!-- Dynamically generated 4 choices -->
+          </div>
+
+          <!-- Multiple choice feedback -->
+          <div id="mc-feedback" class="hidden p-4 rounded-2xl mb-4 text-center font-bold"></div>
+
+          <!-- Next Button -->
+          <button id="btn-mc-next" onclick="nextMCQuestion()" class="w-full py-3.5 rounded-2xl riki-gradient text-white font-bold shadow-md hover:opacity-95 transition hidden flex items-center justify-center space-x-2">
+            <span>Câu tiếp theo</span>
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: DICTIONARY & CONJUGATION REFERENCE TABLE -->
+    <section id="tab-dictionary" class="tab-content hidden">
+      <div class="bg-white rounded-3xl shadow-xl border border-slate-200/80 p-6">
+        
+        <!-- Search & Filter Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+          <div>
+            <h2 class="text-xl font-black text-slate-800 flex items-center">
+              <i data-lucide="book-marked" class="w-6 h-6 mr-2 text-rose-600"></i>
+              Trọn Bộ Bảng Chia Thể JLPT N5 (Minna no Nihongo)
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">Tra cứu tức thì cách chia Vます, Vて, Vない, Vる, Vた và Tính từ Aい / Aな / N</p>
+          </div>
+
+          <div class="flex items-center space-x-3 w-full md:w-80">
+            <div class="relative w-full">
+              <input 
+                type="text" 
+                id="dict-search-input" 
+                oninput="filterDictionaryTable()" 
+                placeholder="Tìm từ (Kanji, Hiragana, Nghĩa)..." 
+                class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              />
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto rounded-2xl border border-slate-200">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 font-bold text-xs uppercase tracking-wider">
+                <th class="p-3 border-b border-slate-200">Từ / Nghĩa</th>
+                <th class="p-3 border-b border-slate-200">Loại từ</th>
+                <th class="p-3 border-b border-slate-200 text-rose-700 bg-rose-50/70">Vます / Lịch sự</th>
+                <th class="p-3 border-b border-slate-200 text-emerald-700 bg-emerald-50/70">Thể て (V-te)</th>
+                <th class="p-3 border-b border-slate-200 text-amber-700 bg-amber-50/70">Thể ない (V-nai)</th>
+                <th class="p-3 border-b border-slate-200 text-sky-700 bg-sky-50/70">Thể る / Nguyên mẫu</th>
+                <th class="p-3 border-b border-slate-200 text-purple-700 bg-purple-50/70">Thể た (V-ta / Quá khứ)</th>
+                <th class="p-3 border-b border-slate-200 text-center">Audio</th>
+              </tr>
+            </thead>
+            <tbody id="dict-table-body" class="divide-y divide-slate-200">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 5: CONJUGATION RULES GUIDE -->
+    <section id="tab-rules" class="tab-content hidden">
+      <div class="max-w-4xl mx-auto space-y-6">
+        
+        <!-- Intro Card -->
+        <div class="riki-gradient text-white p-6 sm:p-8 rounded-3xl shadow-lg">
+          <h2 class="text-2xl font-black mb-2 flex items-center">
+            <i data-lucide="graduation-cap" class="w-7 h-7 mr-2"></i>
+            Bí Kíp Chia Thể Động Từ & Tính Từ N5 Siêu Dễ Nhớ (Riki Guide)
+          </h2>
+          <p class="text-rose-100 text-sm">
+            Nắm vững 3 nhóm động từ và các quy tắc biến đổi thần tốc để phản xạ ngay lập tức khi làm bài thi JLPT N5!
+          </p>
+        </div>
+
+        <!-- Section 1: 3 Groups of Verbs -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
+          <h3 class="text-lg font-black text-rose-700 flex items-center">
+            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs mr-2 font-bold">1</span>
+            Phân Loại 3 Nhóm Động Từ Tiếng Nhật
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-rose-700 block mb-1">Động từ Nhóm 1 (五段 - Godan)</span>
+              <p class="text-xs text-slate-600 mb-2">Đứng trước ます là âm thuộc hàng <strong>い (-i)</strong>.</p>
+              <div class="text-xs bg-white p-2 rounded-lg font-jp text-slate-700 space-y-1">
+                <div>• い<strong>き</strong>ます (Đi), の<strong>み</strong>ます (Uống), か<strong>い</strong>ます (Mua)</div>
+                <div>• し<strong>に</strong>ます (Chết - từ duy nhất đuôi ぬ)</div>
+                <div class="text-amber-600 font-semibold">• ĐB: かえります, はいります, しります, きります, いります</div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-emerald-700 block mb-1">Động từ Nhóm 2 (一段 - Ichidan)</span>
+              <p class="text-xs text-slate-600 mb-2">Đứng trước ます là âm thuộc hàng <strong>え (-e)</strong> hoặc các trường hợp đặc biệt hàng <strong>い (-i)</strong>.</p>
+              <div class="text-xs bg-white p-2 rounded-lg font-jp text-slate-700 space-y-1">
+                <div>• た<strong>べ</strong>ます (Ăn), お<strong>しえ</strong>ます (Dạy), あ<strong>げ</strong>ます (Tặng)</div>
+                <div class="text-rose-600 font-semibold">• ĐB hàng い: みます, おきます, かります, おります, あびます, います, たります, おちます</div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <span class="font-bold text-purple-700 block mb-1">Động từ Nhóm 3 (Bất quy tắc)</span>
+              <p class="text-xs text-slate-600 mb-2">Chỉ gồm 2 động từ chính: <strong>します</strong> (Làm) & <strong>きます</strong> (Đến) và Danh động từ + します.</p>
+              <div class="text-xs bg-white p-2 rounded-lg font-jp text-slate-700 space-y-1">
+                <div>• します → する → して → しない → した</div>
+                <div>• きます → くる → きて → こない → きた</div>
+                <div>• さんぽします, けっこんします, べんきょうします...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Song of V-te / V-ta -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
+          <h3 class="text-lg font-black text-rose-700 flex items-center">
+            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs mr-2 font-bold">2</span>
+            Bài Ca Chia Thể て (V-te) & Thể た (V-ta) Nhóm 1
+          </h3>
+          <p class="text-xs text-slate-500">Thể た chia y hệt như thể て, chỉ cần đổi <strong>て → た</strong> và <strong>で → だ</strong>!</p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+            <div class="p-3 bg-rose-50 rounded-xl border border-rose-200">
+              <span class="font-bold text-rose-800 block text-sm">い, ち, り</span>
+              <span class="text-rose-600 font-bold text-base block my-1">→ って (った)</span>
+              <p class="text-slate-600 font-jp">かいます → かって<br>まちます → まって<br>とります → とって</p>
+            </div>
+
+            <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+              <span class="font-bold text-sky-800 block text-sm">み, び, に</span>
+              <span class="text-sky-600 font-bold text-base block my-1">→ んで (んだ)</span>
+              <p class="text-slate-600 font-jp">のみます → のんで<br>あそびます → あそんで<br>しにます → しんで</p>
+            </div>
+
+            <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+              <span class="font-bold text-emerald-800 block text-sm">き → いて / ぎ → いで</span>
+              <span class="text-emerald-600 font-bold text-base block my-1">→ いて / いで</span>
+              <p class="text-slate-600 font-jp">かきます → かいて<br>いそぎます → いそいで<br><span class="text-rose-600 font-bold">ĐB: いきます → いって</span></p>
+            </div>
+
+            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+              <span class="font-bold text-amber-800 block text-sm">し</span>
+              <span class="text-amber-600 font-bold text-base block my-1">→ して (した)</span>
+              <p class="text-slate-600 font-jp">はなします → はなして<br>だします → だして<br>なおします → なおして</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Adjectives & Nouns table -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
+          <h3 class="text-lg font-black text-rose-700 flex items-center">
+            <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs mr-2 font-bold">3</span>
+            Bảng Chia Tính Từ Đuôi い, Tính Từ Đuôi な & Danh Từ N
+          </h3>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-100 text-slate-700 font-bold">
+                  <th class="p-2.5 border">Loại từ</th>
+                  <th class="p-2.5 border">Hiện tại Khẳng định</th>
+                  <th class="p-2.5 border">Hiện tại Phủ định</th>
+                  <th class="p-2.5 border">Quá khứ Khẳng định</th>
+                  <th class="p-2.5 border">Quá khứ Phủ định</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y font-jp">
+                <tr class="bg-rose-50/40">
+                  <td class="p-2.5 font-bold border font-sans text-rose-700">Tính từ い (Lịch sự)</td>
+                  <td class="p-2.5 border">おいしい<strong>です</strong></td>
+                  <td class="p-2.5 border">おいし<strong>くないです</strong></td>
+                  <td class="p-2.5 border">おいし<strong>かったです</strong></td>
+                  <td class="p-2.5 border">おいし<strong>くなかったです</strong></td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-bold border font-sans text-rose-600">Tính từ い (Thông thường)</td>
+                  <td class="p-2.5 border">おいしい</td>
+                  <td class="p-2.5 border">おいし<strong>くない</strong></td>
+                  <td class="p-2.5 border">おいし<strong>かった</strong></td>
+                  <td class="p-2.5 border">おいし<strong>くなかった</strong></td>
+                </tr>
+                <tr class="bg-emerald-50/40">
+                  <td class="p-2.5 font-bold border font-sans text-emerald-700">Tính từ な & Danh từ (Lịch sự)</td>
+                  <td class="p-2.5 border">きれい / はれ <strong>です</strong></td>
+                  <td class="p-2.5 border">きれい / はれ <strong>じゃありません</strong></td>
+                  <td class="p-2.5 border">きれい / はれ <strong>でした</strong></td>
+                  <td class="p-2.5 border">きれい / はれ <strong>じゃありませんでした</strong></td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-bold border font-sans text-emerald-600">Tính từ な & Danh từ (Thông thường)</td>
+                  <td class="p-2.5 border">きれい / はれ <strong>だ</strong></td>
+                  <td class="p-2.5 border">きれい / はれ <strong>じゃない</strong></td>
+                  <td class="p-2.5 border">きれい / はれ <strong>だった</strong></td>
+                  <td class="p-2.5 border">きれい / はれ <strong>じゃなかった</strong></td>
+                </tr>
+                <tr class="bg-amber-50/60 font-semibold">
+                  <td class="p-2.5 font-bold border font-sans text-amber-800">Đặc biệt: いい (Tốt)</td>
+                  <td class="p-2.5 border">いい (です)</td>
+                  <td class="p-2.5 border"><strong>よくない</strong> (です)</td>
+                  <td class="p-2.5 border"><strong>よかった</strong> (です)</td>
+                  <td class="p-2.5 border"><strong>よくなかった</strong> (です)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center space-x-2">
+        <span class="font-extrabold text-rose-600 font-jp">力 RIKI</span>
+        <span>• N5 Japanese Full Master Edition</span>
+      </div>
+      <p>Không lưu data trên server • Tự động lưu phiên học trên trình duyệt của bạn (Local Storage).</p>
+    </div>
+  </footer>
+
+  <!-- APPLICATION JAVASCRIPT LOGIC -->
+  <script>
+    // ==========================================
+    // 1. FULL 100% N5 VOCABULARY DATASET
+    // ==========================================
+    const VOCAB_DATA = [
+      // --- TÍNH TỪ ĐUÔI い (i-adjectives) ---
+      { id: 'adj_i_1', type: 'adj_i', base: 'おいしい', kanji: '美味しい', meaning: 'Ngon', masu: 'おいしいです', te: 'おいしくて', nai: 'おいしくない', ru: 'おいしい', ta: 'おいしかった', past_neg: 'おいしくなかった', rule: 'Tính từ đuôi い: Bỏ い đổi sang くない / かった / くなかった' },
+      { id: 'adj_i_2', type: 'adj_i', base: 'さむい', kanji: '寒い', meaning: 'Lạnh (thời tiết)', masu: 'さむいです', te: 'さむくて', nai: 'さむくない', ru: 'さむい', ta: 'さむかった', past_neg: 'さむくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_3', type: 'adj_i', base: 'おもい', kanji: '重い', meaning: 'Nặng', masu: 'おもいです', te: 'おもくて', nai: 'おもくない', ru: 'おもい', ta: 'おもかった', past_neg: 'おもくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_4', type: 'adj_i', base: 'あまい', kanji: '甘い', meaning: 'Ngọt', masu: 'あまいです', te: 'あまくて', nai: 'あまくない', ru: 'あまい', ta: 'あまかった', past_neg: 'あまくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_5', type: 'adj_i', base: 'つめたい', kanji: '冷たい', meaning: 'Lạnh (cảm giác/đồ uống)', masu: 'つめたいです', te: 'つめたくて', nai: 'つめたくない', ru: 'つめたい', ta: 'つめたかった', past_neg: 'つめたくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_6', type: 'adj_i', base: 'やすい', kanji: '安い', meaning: 'Rẻ', masu: 'やすいです', te: 'やすくて', nai: 'やすくない', ru: 'やすい', ta: 'やすかった', past_neg: 'やすくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_7', type: 'adj_i', base: 'たかい', kanji: '高い', meaning: 'Cao, Đắt', masu: 'たかいです', te: 'たかくて', nai: 'たかくない', ru: 'たかい', ta: 'たかかった', past_neg: 'たかくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_8', type: 'adj_i', base: 'おおきい', kanji: '大きい', meaning: 'To, Lớn', masu: 'おおきいです', te: 'おおきくて', nai: 'おおきくない', ru: 'おおきい', ta: 'おおきかった', past_neg: 'おおきくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_9', type: 'adj_i', base: 'ちいさい', kanji: '小さい', meaning: 'Nhỏ, Bé', masu: 'ちいさいです', te: 'ちいさくて', nai: 'ちいさくない', ru: 'ちいさい', ta: 'ちいさかった', past_neg: 'ちいさくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_10', type: 'adj_i', base: 'あたらしい', kanji: '新しい', meaning: 'Mới', masu: 'あたらしいです', te: 'あたらしくて', nai: 'あたらしくない', ru: 'あたらしい', ta: 'あたらしかった', past_neg: 'あたらしくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_11', type: 'adj_i', base: 'ふるい', kanji: '古い', meaning: 'Cũ', masu: 'ふるいです', te: 'ふるくて', nai: 'ふるくない', ru: 'ふるい', ta: 'ふるかった', past_neg: 'ふるくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_12', type: 'adj_i', base: 'むずかしい', kanji: '難しい', meaning: 'Khó', masu: 'むずかしいです', te: 'むずかしくて', nai: 'むずかしくない', ru: 'むずかしい', ta: 'むずかしかった', past_neg: 'むずかしくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_13', type: 'adj_i', base: 'たのしい', kanji: '楽しい', meaning: 'Vui vẻ', masu: 'たのしいです', te: 'たのしくて', nai: 'たのしくない', ru: 'たのしい', ta: 'たのしかった', past_neg: 'たのしくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_14', type: 'adj_i', base: 'うつくしい', kanji: '美しい', meaning: 'Đẹp đẽ', masu: 'うつくしいです', te: 'うつくしくて', nai: 'うつくしくない', ru: 'うつくしい', ta: 'うつくしかった', past_neg: 'うつくしくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_15', type: 'adj_i', base: 'ひくい', kanji: '低い', meaning: 'Thấp', masu: 'ひくいです', te: 'ひくくて', nai: 'ひくくない', ru: 'ひくい', ta: 'ひくかった', past_neg: 'ひくくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_16', type: 'adj_i', base: 'いそがしい', kanji: '忙しい', meaning: 'Bận rộn', masu: 'いそがしいです', te: 'いそがしくて', nai: 'いそがしくない', ru: 'いそがしい', ta: 'いそがしかった', past_neg: 'いそがしくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_17', type: 'adj_i', base: 'しろい', kanji: '白い', meaning: 'Trắng', masu: 'しろいです', te: 'しろくて', nai: 'しろくない', ru: 'しろい', ta: 'しろかった', past_neg: 'しろくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_18', type: 'adj_i', base: 'おおい', kanji: '多い', meaning: 'Nhiều', masu: 'おおいです', te: 'おおくて', nai: 'おおくない', ru: 'おおい', ta: 'おおかった', past_neg: 'おおくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_19', type: 'adj_i', base: 'とおい', kanji: '遠い', meaning: 'Xa', masu: 'とおいです', te: 'とおくて', nai: 'とおくない', ru: 'とおい', ta: 'とおかった', past_neg: 'とおくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_20', type: 'adj_i', base: 'いい', kanji: '良い', meaning: 'Tốt (Đặc biệt: chia theo よい)', masu: 'いいです', te: 'よくて', nai: 'よくない', ru: 'いい', ta: 'よかった', past_neg: 'よくなかった', rule: 'Đặc biệt: いい chia gốc theo よい' },
+      { id: 'adj_i_21', type: 'adj_i', base: 'やさしい', kanji: '優しい / 易しい', meaning: 'Dễ dãi, Hiền lành / Dễ', masu: 'やさしいです', te: 'やさしくて', nai: 'やさしくない', ru: 'やさしい', ta: 'やさしかった', past_neg: 'やさしくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_22', type: 'adj_i', base: 'おもしろい', kanji: '面白い', meaning: 'Thú vị', masu: 'おもしろいです', te: 'おもしろくて', nai: 'おもしろくない', ru: 'おもしろい', ta: 'おもしろかった', past_neg: 'おもしろくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_23', type: 'adj_i', base: 'すずしい', kanji: '涼しい', meaning: 'Mát mẻ', masu: 'すずしいです', te: 'すずしくて', nai: 'すずしくない', ru: 'すずしい', ta: 'すずしかった', past_neg: 'すずしくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_24', type: 'adj_i', base: 'かるい', kanji: '軽い', meaning: 'Nhẹ', masu: 'かるいです', te: 'かるくて', nai: 'かるくない', ru: 'かるい', ta: 'かるかった', past_neg: 'かるくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_25', type: 'adj_i', base: 'すくない', kanji: '少ない', meaning: 'Ít', masu: 'すくないです', te: 'すくなくて', nai: 'すくなくない', ru: 'すくない', ta: 'すくなかった', past_neg: 'すくなくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_26', type: 'adj_i', base: 'はやい', kanji: '早い / 速い', meaning: 'Sớm / Nhanh', masu: 'はやいです', te: 'はやくて', nai: 'はやくない', ru: 'はやい', ta: 'はやかった', past_neg: 'はやくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_27', type: 'adj_i', base: 'あつい', kanji: '暑い / 熱い', meaning: 'Nóng (thời tiết / cảm giác)', masu: 'あついです', te: 'あつくて', nai: 'あつくない', ru: 'あつい', ta: 'あつかった', past_neg: 'あつくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_28', type: 'adj_i', base: 'あたたかい', kanji: '暖かい / 温かい', meaning: 'Ấm áp', masu: 'あたたかいです', te: 'あたたかくて', nai: 'あたたかくない', ru: 'あたたかい', ta: 'あたたかかった', past_neg: 'あたたかくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_29', type: 'adj_i', base: 'わるい', kanji: '悪い', meaning: 'Xấu, Tồi tệ', masu: 'わるいです', te: 'わるくて', nai: 'わるくない', ru: 'わるい', ta: 'わるかった', past_neg: 'わるくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_30', type: 'adj_i', base: 'ひろい', kanji: '広い', meaning: 'Rộng rãi', masu: 'ひろいです', te: 'ひろくて', nai: 'ひろくない', ru: 'ひろい', ta: 'ひろかった', past_neg: 'ひろくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_31', type: 'adj_i', base: 'せまい', kanji: '狭い', meaning: 'Chật hẹp', masu: 'せまいです', te: 'せまくて', nai: 'せまくない', ru: 'せまい', ta: 'せまかった', past_neg: 'せまくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_32', type: 'adj_i', base: 'ながい', kanji: '長い', meaning: 'Dài', masu: 'ながいです', te: 'ながくて', nai: 'ながくない', ru: 'ながい', ta: 'ながかった', past_neg: 'ながくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_33', type: 'adj_i', base: 'みじかい', kanji: '短い', meaning: 'Ngắn', masu: 'みじかいです', te: 'みじかくて', nai: 'みじかくない', ru: 'みじかい', ta: 'みじかかった', past_neg: 'みじかくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_34', type: 'adj_i', base: 'あかるい', kanji: '明るい', meaning: 'Sáng sủa, Tươi sáng', masu: 'あかるいです', te: 'あかるくて', nai: 'あかるくない', ru: 'あかるい', ta: 'あかるかった', past_neg: 'あかるくなかった', rule: 'Tính từ đuôi い' },
+      { id: 'adj_i_35', type: 'adj_i', base: 'くらい', kanji: '暗い', meaning: 'Tối tăm, U ám', masu: 'くらいです', te: 'くらくて', nai: 'くらくない', ru: 'くらい', ta: 'くらかった', past_neg: 'くらくなかった', rule: 'Tính từ đuôi い' },
+
+      // --- TÍNH TỪ ĐUÔI な (na-adjectives) ---
+      { id: 'adj_na_1', type: 'adj_na', base: 'きれい', kanji: '綺麗', meaning: 'Đẹp, Sạch sẽ', masu: 'きれいです', te: 'きれいで', nai: 'きれいじゃない', ru: 'きれいだ', ta: 'きれいだった', past_neg: 'きれいじゃなかった', rule: 'Tính từ な: Đi kèm だ / じゃない / だった / じゃなかった' },
+      { id: 'adj_na_2', type: 'adj_na', base: 'ゆうめい', kanji: '有名', meaning: 'Nổi tiếng', masu: 'ゆうめいです', te: 'ゆうめいで', nai: 'ゆうめいじゃない', ru: 'ゆうめいだ', ta: 'ゆうめいだった', past_neg: 'ゆうめいじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_3', type: 'adj_na', base: 'ひま', kanji: '暇', meaning: 'Rảnh rỗi', masu: 'ひまです', te: 'ひまで', nai: 'ひまじゃない', ru: 'ひまだ', ta: 'ひまだった', past_neg: 'ひまじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_4', type: 'adj_na', base: 'にぎやか', kanji: '賑やか', meaning: 'Nhộn nhịp, Sầm uất', masu: 'にぎやかです', te: 'にぎやかで', nai: 'にぎやかじゃない', ru: 'にぎやかだ', ta: 'にぎやかだった', past_neg: 'にぎやかじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_5', type: 'adj_na', base: 'しんせつ', kanji: '親切', meaning: 'Tử tế, Thân thiện', masu: 'しんせつです', te: 'しんせつで', nai: 'しんせつじゃない', ru: 'しんせつだ', ta: 'しんせつだった', past_neg: 'しんせつじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_6', type: 'adj_na', base: 'すてき', kanji: '素敵', meaning: 'Tuyệt vời, Đẹp đẽ', masu: 'すてきです', te: 'すてきで', nai: 'すてきじゃない', ru: 'すてきだ', ta: 'すてきだった', past_neg: 'すてきじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_7', type: 'adj_na', base: 'べんり', kanji: '便利', meaning: 'Tiện lợi', masu: 'べんりです', te: 'べんりで', nai: 'べんりじゃない', ru: 'べんりだ', ta: 'べんりだった', past_neg: 'べんりじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_8', type: 'adj_na', base: 'しずか', kanji: '静か', meaning: 'Yên tĩnh', masu: 'しずかです', te: 'しずかで', nai: 'しずかじゃない', ru: 'しずかだ', ta: 'しずかだった', past_neg: 'しずかじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_9', type: 'adj_na', base: 'ふべん', kanji: '不便', meaning: 'Bất tiện', masu: 'ふべんです', te: 'ふべんで', nai: 'ふべんじゃない', ru: 'ふべんだ', ta: 'ふべんだった', past_neg: 'ふべんじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_10', type: 'adj_na', base: 'すき', kanji: '好き', meaning: 'Thích', masu: 'すきです', te: 'すきで', nai: 'すきじゃない', ru: 'すきだ', ta: 'すきだった', past_neg: 'すきじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_11', type: 'adj_na', base: 'きらい', kanji: '嫌い', meaning: 'Ghét', masu: 'きらいです', te: 'きらいで', nai: 'きらいじゃない', ru: 'きらいだ', ta: 'きらいだった', past_neg: 'きらいじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_12', type: 'adj_na', base: 'じょうず', kanji: '上手', meaning: 'Giỏi', masu: 'じょうずです', te: 'じょうずで', nai: 'じょうずじゃない', ru: 'じょうずだ', ta: 'じょうずだった', past_neg: 'じょうずじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_13', type: 'adj_na', base: 'へた', kanji: '下手', meaning: 'Kém, Vụng về', masu: 'へたです', te: 'へたで', nai: 'へたじゃない', ru: 'へただ', ta: 'へただった', past_neg: 'へたじゃなかった', rule: 'Tính từ な' },
+      { id: 'adj_na_14', type: 'adj_na', base: 'たいへん', kanji: '大変', meaning: 'Vất vả, Khổ sở', masu: 'たいへんです', te: 'たいへんで', nai: 'たいへんじゃない', ru: 'たいへんだ', ta: 'たいへんだった', past_neg: 'たいへんじゃなかった', rule: 'Tính từ な' },
+
+      // --- DANH TỪ (Nouns) ---
+      { id: 'noun_1', type: 'noun', base: 'はれ', kanji: '晴れ', meaning: 'Trời nắng', masu: 'はれです', te: 'はれで', nai: 'はれじゃない', ru: 'はれだ', ta: 'はれだった', past_neg: 'はれじゃなかった', rule: 'Danh từ chia giống tính từ đuôi な' },
+      { id: 'noun_2', type: 'noun', base: 'くもり', kanji: '曇り', meaning: 'Trời nhiều mây', masu: 'くもりです', te: 'くもりで', nai: 'くもりじゃない', ru: 'くもりだ', ta: 'くもりだった', past_neg: 'くもりじゃなかった', rule: 'Danh từ' },
+      { id: 'noun_3', type: 'noun', base: 'ゆき', kanji: '雪', meaning: 'Tuyết', masu: 'ゆきです', te: 'ゆきで', nai: 'ゆきじゃない', ru: 'ゆきだ', ta: 'ゆきだった', past_neg: 'ゆきじゃなかった', rule: 'Danh từ' },
+      { id: 'noun_4', type: 'noun', base: 'いいひと', kanji: 'いい人', meaning: 'Người tốt', masu: 'いい人です', te: 'いい人で', nai: 'いい人じゃない', ru: 'いい人だ', ta: 'いい人だった', past_neg: 'いい人じゃなかった', rule: 'Danh từ' },
+      { id: 'noun_5', type: 'noun', base: 'おかねもち', kanji: 'お金持ち', meaning: 'Người giàu có', masu: 'おかねもちです', te: 'おかねもちで', nai: 'おかねもちじゃない', ru: 'おかねもちだ', ta: 'おかねもちだった', past_neg: 'おかねもちじゃなかった', rule: 'Danh từ' },
+      { id: 'noun_6', type: 'noun', base: 'ひとり', kanji: '一人', meaning: 'Một mình / 1 người', masu: 'ひとりです', te: 'ひとりで', nai: 'ひとりじゃない', ru: 'ひとりだ', ta: 'ひとりだった', past_neg: 'ひとりじゃなかった', rule: 'Danh từ' },
+      { id: 'noun_7', type: 'noun', base: 'あめ', kanji: '雨', meaning: 'Mưa', masu: 'あめです', te: 'あめで', nai: 'あめじゃない', ru: 'あめだ', ta: 'あめだった', past_neg: 'あめじゃなかった', rule: 'Danh từ' },
+      { id: 'noun_8', type: 'noun', base: 'びょうき', kanji: '病気', meaning: 'Bệnh tật, Ốm đau', masu: 'びょうきです', te: 'びょうきで', nai: 'びょうきじゃない', ru: 'びょうきだ', ta: 'びょうきだった', past_neg: 'びょうきじゃなかった', rule: 'Danh từ' },
+
+      // --- ĐỘNG TỪ NHÓM 1 (Godan) ---
+      { id: 'v1_1', type: 'verb1', base: 'いきます', kanji: '行きます', meaning: 'Đi', masu: 'いきます', te: 'いって', nai: 'いかない', ru: 'いく', ta: 'いった', past_neg: 'いかなかった', rule: 'Đặc biệt: 行きます → いって / いった' },
+      { id: 'v1_2', type: 'verb1', base: 'かいます', kanji: '買います', meaning: 'Mua', masu: 'かいます', te: 'かって', nai: 'かわない', ru: 'かう', ta: 'かった', past_neg: 'かわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_3', type: 'verb1', base: 'かきます', kanji: '書きます', meaning: 'Viết', masu: 'かきます', te: 'かいて', nai: 'かかない', ru: 'かく', ta: 'かいた', past_neg: 'かなかかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_4', type: 'verb1', base: 'のみます', kanji: '飲みます', meaning: 'Uống', masu: 'のみます', te: 'のんで', nai: 'のまない', ru: 'のむ', ta: 'のんだ', past_neg: 'のまなかった', rule: 'Hàng み → んで / まない / む / んだ' },
+      { id: 'v1_5', type: 'verb1', base: 'きります', kanji: '切ります', meaning: 'Cắt', masu: 'きります', te: 'きって', nai: 'きらない', ru: 'きる', ta: 'きった', past_neg: 'きらなかった', rule: 'ĐB Nhóm 1: り → って / らない / る / った' },
+      { id: 'v1_6', type: 'verb1', base: 'もらいます', kanji: '貰います', meaning: 'Nhận', masu: 'もらいます', te: 'もらって', nai: 'もらわない', ru: 'もらう', ta: 'もらった', past_neg: 'もらわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_7', type: 'verb1', base: 'すわります', kanji: '座ります', meaning: 'Ngồi', masu: 'すわります', te: 'すわって', nai: 'すわらない', ru: 'すわる', ta: 'すわった', past_neg: 'すわらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_8', type: 'verb1', base: 'しります', kanji: '知ります', meaning: 'Biết', masu: 'しります', te: 'しって', nai: 'しらない', ru: 'しる', ta: 'しった', past_neg: 'しらなかった', rule: 'ĐB Nhóm 1: り → って / らない / る / った' },
+      { id: 'v1_9', type: 'verb1', base: 'ききます', kanji: '聞きます', meaning: 'Nghe, Hỏi', masu: 'ききます', te: 'きいて', nai: 'きかない', ru: 'きく', ta: 'きいた', past_neg: 'きかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_10', type: 'verb1', base: 'かします', kanji: '貸します', meaning: 'Cho mượn, Cho vay', masu: 'かします', te: 'かして', nai: 'かさない', ru: 'かす', ta: 'かした', past_neg: 'かさなかった', rule: 'Hàng し → して / さない / す / した' },
+      { id: 'v1_11', type: 'verb1', base: 'てつだいます', kanji: '手伝います', meaning: 'Giúp đỡ', masu: 'てつだいます', te: 'てつだって', nai: 'てつだわない', ru: 'てつだう', ta: 'てつだった', past_neg: 'てつだわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_12', type: 'verb1', base: 'さわります', kanji: '触ります', meaning: 'Sờ, Chạm vào', masu: 'さわります', te: 'さわって', nai: 'さわらない', ru: 'さわる', ta: 'さわった', past_neg: 'さわらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_13', type: 'verb1', base: 'とまります', kanji: '止まります / 泊まります', meaning: 'Dừng lại / Trọ lại', masu: 'とまります', te: 'とまって', nai: 'とまらない', ru: 'とまる', ta: 'とまった', past_neg: 'とまらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_14', type: 'verb1', base: 'とります', kanji: '取ります / 撮ります', meaning: 'Lấy / Chụp ảnh', masu: 'とります', te: 'とって', nai: 'とらない', ru: 'とる', ta: 'とった', past_neg: 'とらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_15', type: 'verb1', base: 'ならいます', kanji: '習います', meaning: 'Học từ ai đó', masu: 'ならいます', te: 'ならって', nai: 'ならわない', ru: 'ならう', ta: 'ならった', past_neg: 'ならわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_16', type: 'verb1', base: 'ぬぎます', kanji: '脱ぎます', meaning: 'Cởi (đồ, giày)', masu: 'ぬぎます', te: 'ぬいで', nai: 'ぬがない', ru: 'ぬぐ', ta: 'ぬいだ', past_neg: 'ぬがなかった', rule: 'Hàng ぎ → いで / がない / ぐ / いだ' },
+      { id: 'v1_17', type: 'verb1', base: 'よみます', kanji: '読みます', meaning: 'Đọc', masu: 'よみます', te: 'よんで', nai: 'よまない', ru: 'よむ', ta: 'よんだ', past_neg: 'よまなかった', rule: 'Hàng み → んで / まない / む / んだ' },
+      { id: 'v1_18', type: 'verb1', base: 'のぼります', kanji: '登ります', meaning: 'Leo núi, Trèo', masu: 'のぼります', te: 'のぼって', nai: 'のぼらない', ru: 'のぼる', ta: 'のぼった', past_neg: 'のぼらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_19', type: 'verb1', base: 'のります', kanji: '乗ります', meaning: 'Lên xe, Đi tàu', masu: 'のります', te: 'のって', nai: 'のらない', ru: 'のる', ta: 'のった', past_neg: 'のらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_20', type: 'verb1', base: 'はいります', kanji: '入ります', meaning: 'Đi vào, Bước vào', masu: 'はいります', te: 'はいって', nai: 'はいらない', ru: 'はいる', ta: 'はいった', past_neg: 'はいらなかった', rule: 'ĐB Nhóm 1: り → って / らない / る / った' },
+      { id: 'v1_21', type: 'verb1', base: 'あいます', kanji: '会います', meaning: 'Gặp gỡ', masu: 'あいます', te: 'あって', nai: 'あわない', ru: 'あう', ta: 'あった', past_neg: 'あわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_22', type: 'verb1', base: 'はたらきます', kanji: '働きます', meaning: 'Làm việc', masu: 'はたらきます', te: 'はたらいて', nai: 'はたらかない', ru: 'はたらく', ta: 'はたらいた', past_neg: 'はたらかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_23', type: 'verb1', base: 'あらいます', kanji: '洗います', meaning: 'Rửa, Giặt', masu: 'あらいます', te: 'あらって', nai: 'あらわない', ru: 'あらう', ta: 'あらった', past_neg: 'あらわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_24', type: 'verb1', base: 'あそびます', kanji: '遊びます', meaning: 'Chơi đùa', masu: 'あそびます', te: 'あそんで', nai: 'あそばない', ru: 'あそぶ', ta: 'あそんだ', past_neg: 'あそばなかった', rule: 'Hàng び → んで / ばない / ぶ / んだ' },
+      { id: 'v1_25', type: 'verb1', base: 'うたいます', kanji: '歌います', meaning: 'Hát', masu: 'うたいます', te: 'うたって', nai: 'うたわない', ru: 'うたう', ta: 'うたった', past_neg: 'うたわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_26', type: 'verb1', base: 'うります', kanji: '売ります', meaning: 'Bán', masu: 'うります', te: 'うって', nai: 'うらない', ru: 'うる', ta: 'うった', past_neg: 'うらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_27', type: 'verb1', base: 'おくります', kanji: '送ります', meaning: 'Gửi, Tiễn', masu: 'おくります', te: 'おくって', nai: 'おくらない', ru: 'おくる', ta: 'おくった', past_neg: 'おくらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_28', type: 'verb1', base: 'およぎます', kanji: '泳ぎます', meaning: 'Bơi', masu: 'およぎます', te: 'およいで', nai: 'およがない', ru: 'およぐ', ta: 'およいだ', past_neg: 'およがなかった', rule: 'Hàng ぎ → いで / がない / ぐ / いだ' },
+      { id: 'v1_29', type: 'verb1', base: 'おもいます', kanji: '思います', meaning: 'Nghĩ rằng', masu: 'おもいます', te: 'おもって', nai: 'おもわない', ru: 'おもう', ta: 'おもった', past_neg: 'おもわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_30', type: 'verb1', base: 'かぶります', kanji: '被ります', meaning: 'Đội (mũ)', masu: 'かぶります', te: 'かぶって', nai: 'かぶらない', ru: 'かぶる', ta: 'かぶった', past_neg: 'かぶらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_31', type: 'verb1', base: 'がんばります', kanji: '頑張ります', meaning: 'Cố gắng', masu: 'がんばります', te: 'がんばって', nai: 'がんばらない', ru: 'がんばる', ta: 'がんばった', past_neg: 'がんばらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_32', type: 'verb1', base: 'はきます', kanji: '履きます', meaning: 'Mặc (quần), Đi (giày)', masu: 'はきます', te: 'はいて', nai: 'はかない', ru: 'はく', ta: 'はいた', past_neg: 'はかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_33', type: 'verb1', base: 'よびます', kanji: '呼びます', meaning: 'Gọi, Kêu', masu: 'よびます', te: 'よんで', nai: 'よばない', ru: 'よぶ', ta: 'よんだ', past_neg: 'よばなかった', rule: 'Hàng び → んで / ばない / ぶ / んだ' },
+      { id: 'v1_34', type: 'verb1', base: 'まがります', kanji: '曲がります', meaning: 'Rẽ, Quẹo', masu: 'まがります', te: 'まがって', nai: 'まがらない', ru: 'まがる', ta: 'まがった', past_neg: 'まがらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_35', type: 'verb1', base: 'はなします', kanji: '話します', meaning: 'Nói chuyện', masu: 'はなします', te: 'はなして', nai: 'はなさない', ru: 'はなす', ta: 'はなした', past_neg: 'はなさなかった', rule: 'Hàng し → して / さない / す / した' },
+      { id: 'v1_36', type: 'verb1', base: 'ふります', kanji: '降ります', meaning: 'Rơi (mưa, tuyết)', masu: 'ふります', te: 'ふって', nai: 'ふらない', ru: 'ふる', ta: 'ふった', past_neg: 'ふらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_37', type: 'verb1', base: 'もっていきます', kanji: '持っていきます', meaning: 'Mang đi', masu: 'もっていきます', te: 'もっていって', nai: 'もっていかない', ru: 'もっていく', ta: 'もっていった', past_neg: 'もっていかなかった', rule: 'ĐB: いく → いって / いった' },
+      { id: 'v1_38', type: 'verb1', base: 'もちます', kanji: '持ちます', meaning: 'Cầm, Nắm, Mang', masu: 'もちます', te: 'もって', nai: 'もたない', ru: 'もつ', ta: 'もった', past_neg: 'もたなかった', rule: 'Hàng ち → って / たない / つ / った' },
+      { id: 'v1_39', type: 'verb1', base: 'やくにたちます', kanji: '役に立ちます', meaning: 'Có ích, Hữu ích', masu: 'やくにたちます', te: 'やくにたって', nai: 'やくにたたない', ru: 'やくにたつ', ta: 'やくにたった', past_neg: 'やくにたたなかった', rule: 'Hàng ち → って / たない / つ / った' },
+      { id: 'v1_40', type: 'verb1', base: 'わかります', kanji: '分かります', meaning: 'Hiểu, Biết', masu: 'わかります', te: 'わかって', nai: 'わからない', ru: 'わかる', ta: 'わかった', past_neg: 'わからなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_41', type: 'verb1', base: 'まわします', kanji: '回します', meaning: 'Xoay, Vặn', masu: 'まわします', te: 'まわして', nai: 'まわさない', ru: 'まわす', ta: 'まわした', past_neg: 'まわさなかった', rule: 'Hàng し → して / さない / す / した' },
+      { id: 'v1_42', type: 'verb1', base: 'ひきます', kanji: '引きます / 弾きます', meaning: 'Kéo, Gảy đàn', masu: 'ひきます', te: 'ひいて', nai: 'ひかない', ru: 'ひく', ta: 'ひいた', past_neg: 'ひかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_43', type: 'verb1', base: 'はらいます', kanji: '払います', meaning: 'Trả tiền', masu: 'はらいます', te: 'はらって', nai: 'はらわない', ru: 'はらう', ta: 'はらった', past_neg: 'はらわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_44', type: 'verb1', base: 'まちます', kanji: '待ちます', meaning: 'Đợi, Chờ', masu: 'まちます', te: 'まって', nai: 'またない', ru: 'まつ', ta: 'まった', past_neg: 'またなかった', rule: 'Hàng ち → って / たない / つ / った' },
+      { id: 'v1_45', type: 'verb1', base: 'やすみます', kanji: '休みます', meaning: 'Nghỉ ngơi', masu: 'やすみます', te: 'やすんで', nai: 'やすまない', ru: 'やすむ', ta: 'やすんだ', past_neg: 'やすまなかった', rule: 'Hàng み → んで / まない / む / んだ' },
+      { id: 'v1_46', type: 'verb1', base: 'わたります', kanji: '渡ります', meaning: 'Băng qua (đường, cầu)', masu: 'わたります', te: 'わたって', nai: 'わたらない', ru: 'わたる', ta: 'わたった', past_neg: 'わたらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_47', type: 'verb1', base: 'すいます', kanji: '吸います', meaning: 'Hút (thuốc), Hít', masu: 'すいます', te: 'すって', nai: 'すわない', ru: 'すう', ta: 'すった', past_neg: 'すわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_48', type: 'verb1', base: 'たちます', kanji: '立ちます', meaning: 'Đứng dậy', masu: 'たちます', te: 'たって', nai: 'たたない', ru: 'たつ', ta: 'たった', past_neg: 'たたなかった', rule: 'Hàng ち → って / たない / つ / った' },
+      { id: 'v1_49', type: 'verb1', base: 'だします', kanji: '出します', meaning: 'Lấy ra, Nộp', masu: 'だします', te: 'だして', nai: 'ださない', ru: 'だす', ta: 'だした', past_neg: 'ださなかった', rule: 'Hàng し → して / さない / す / した' },
+      { id: 'v1_50', type: 'verb1', base: 'つくります', kanji: '作ります', meaning: 'Chế tạo, Làm', masu: 'つくります', te: 'つくって', nai: 'つくらない', ru: 'つくる', ta: 'つくった', past_neg: 'つくらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_51', type: 'verb1', base: 'つかいます', kanji: '使います', meaning: 'Sử dụng', masu: 'つかいます', te: 'つかって', nai: 'つかわない', ru: 'つかう', ta: 'つかった', past_neg: 'つかわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_52', type: 'verb1', base: 'なおします', kanji: '直します', meaning: 'Sửa chữa', masu: 'なおします', te: 'なおして', nai: 'なおさない', ru: 'なおす', ta: 'なおした', past_neg: 'なおさなかった', rule: 'Hàng し → して / さない / す / した' },
+      { id: 'v1_53', type: 'verb1', base: 'なおります', kanji: '治ります / 直ります', meaning: 'Khỏi bệnh / Được sửa', masu: 'なおります', te: 'なおって', nai: 'なおらない', ru: 'なおる', ta: 'なおった', past_neg: 'なおらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_54', type: 'verb1', base: 'あるきます', kanji: '歩きます', meaning: 'Đi bộ', masu: 'あるきます', te: 'あるいて', nai: 'あるかない', ru: 'あるく', ta: 'あるいた', past_neg: 'あるかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_55', type: 'verb1', base: 'おもいだします', kanji: '思い出す', meaning: 'Nhớ ra, Hồi tưởng', masu: 'おもいだします', te: 'おもいだして', nai: 'おもいださない', ru: 'おもいだす', ta: 'おもいだした', past_neg: 'おもいださなかった', rule: 'Hàng し → して / さない / す / した' },
+      { id: 'v1_56', type: 'verb1', base: 'あります', kanji: '有ります', meaning: 'Có (đồ vật vô tri)', masu: 'あります', te: 'あって', nai: 'ない', ru: 'ある', ta: 'あった', past_neg: 'なかった', rule: 'Đặc biệt: Phủ định là ない' },
+      { id: 'v1_57', type: 'verb1', base: 'いります', kanji: '要ります', meaning: 'Cần', masu: 'いります', te: 'いって', nai: 'いらない', ru: 'いる', ta: 'いった', past_neg: 'いらなかった', rule: 'ĐB Nhóm 1: り → って / らない / る / った' },
+      { id: 'v1_58', type: 'verb1', base: 'おします', kanji: '押します', meaning: 'Ấn, Đẩy', masu: 'おします', te: 'おして', nai: 'おさない', ru: 'おす', ta: 'おした', past_neg: 'おさなかった', rule: 'Hàng し → して / さない / す / した' },
+      { id: 'v1_59', type: 'verb1', base: 'おわります', kanji: '終わります', meaning: 'Kết thúc', masu: 'おわります', te: 'おわって', nai: 'おわらない', ru: 'おわる', ta: 'おわった', past_neg: 'おわらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_60', type: 'verb1', base: 'かえります', kanji: '帰ります', meaning: 'Trở về', masu: 'かえります', te: 'かえって', nai: 'かえらない', ru: 'かえる', ta: 'かえった', past_neg: 'かえらなかった', rule: 'ĐB Nhóm 1: り → って / らない / る / った' },
+      { id: 'v1_61', type: 'verb1', base: 'かかります', kanji: '掛かります', meaning: 'Mất (thời gian, tiền)', masu: 'かかります', te: 'かかって', nai: 'かからない', ru: 'かかる', ta: 'かかった', past_neg: 'かからなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_62', type: 'verb1', base: 'かちます', kanji: '勝ちます', meaning: 'Thắng', masu: 'かちます', te: 'かって', nai: 'かたない', ru: 'かつ', ta: 'かった', past_neg: 'かたなかった', rule: 'Hàng ち → って / たない / つ / った' },
+      // --- BỔ SUNG 100% ĐỘNG TỪ NHÓM 1 N5 ---
+      { id: 'v1_63', type: 'verb1', base: 'しにます', kanji: '死にます', meaning: 'Chết (Từ duy nhất đuôi ぬ)', masu: 'しにます', te: 'しんで', nai: 'しなない', ru: 'しぬ', ta: 'しんだ', past_neg: 'しななかった', rule: 'Hàng に → んで / なない / ぬ / んだ' },
+      { id: 'v1_64', type: 'verb1', base: 'いそぎます', kanji: '急ぎます', meaning: 'Vội vàng, Khẩn trương', masu: 'いそぎます', te: 'いそいで', nai: 'いそがない', ru: 'いそぐ', ta: 'いそいだ', past_neg: 'いそがなかった', rule: 'Hàng ぎ → いで / がない / ぐ / いだ' },
+      { id: 'v1_65', type: 'verb1', base: 'すみます', kanji: '住みます', meaning: 'Sinh sống, Cư trú', masu: 'すみます', te: 'すんで', nai: 'すまない', ru: 'すむ', ta: 'すんだ', past_neg: 'すまなかった', rule: 'Hàng み → んで / まない / む / んだ' },
+      { id: 'v1_66', type: 'verb1', base: 'つきます', kanji: '着きます', meaning: 'Đến nơi, Tới nơi', masu: 'つきます', te: 'ついて', nai: 'つかない', ru: 'つく', ta: 'ついた', past_neg: 'つかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_67', type: 'verb1', base: 'おきます', kanji: '置きます', meaning: 'Đặt, Để', masu: 'おきます', te: 'おいて', nai: 'おかない', ru: 'おく', ta: 'おいた', past_neg: 'おかなかった', rule: 'Hàng き → いて / かない / く / いた (Khác với 起きる)' },
+      { id: 'v1_68', type: 'verb1', base: 'さがします', kanji: '探します', meaning: 'Tìm kiếm', masu: 'さがします', te: 'さがして', nai: 'さがさない', ru: 'さがす', ta: 'さがした', past_neg: 'さがさなかった', rule: 'Hàng し → して / さない / す / した' },
+      { id: 'v1_69', type: 'verb1', base: 'ならびます', kanji: '並びます', meaning: 'Xếp hàng', masu: 'ならびます', te: 'ならんで', nai: 'ならばない', ru: 'ならぶ', ta: 'ならんだ', past_neg: 'ならばなかった', rule: 'Hàng び → んで / ばない / ぶ / んだ' },
+      { id: 'v1_70', type: 'verb1', base: 'なくします', kanji: '無くします', meaning: 'Làm mất', masu: 'なくします', te: 'なくして', nai: 'なくさない', ru: 'なくす', ta: 'なくした', past_neg: 'なくさなかった', rule: 'Hàng し → して / さない / す / した' },
+      { id: 'v1_71', type: 'verb1', base: 'なくなります', kanji: '無くなります / 亡くなります', meaning: 'Mất đi, Hết', masu: 'なくなります', te: 'なくなって', nai: 'なくならない', ru: 'なくなる', ta: 'なくなった', past_neg: 'なくならなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_72', type: 'verb1', base: 'なきます', kanji: '泣きます', meaning: 'Khóc', masu: 'なきます', te: 'ないて', nai: 'なかない', ru: 'なく', ta: 'ないた', past_neg: 'なかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_73', type: 'verb1', base: 'わらいます', kanji: '笑います', meaning: 'Cười', masu: 'わらいます', te: 'わらって', nai: 'わらわない', ru: 'わらう', ta: 'わらった', past_neg: 'わらわなかった', rule: 'Hàng い → って / わない / う / った' },
+      { id: 'v1_74', type: 'verb1', base: 'とびます', kanji: '飛びます', meaning: 'Bay', masu: 'とびます', te: 'とんで', nai: 'とばない', ru: 'とぶ', ta: 'とんだ', past_neg: 'とばなかった', rule: 'Hàng び → んで / ばない / ぶ / んだ' },
+      { id: 'v1_75', type: 'verb1', base: 'さきます', kanji: '咲きます', meaning: 'Nở (hoa)', masu: 'さきます', te: 'さいて', nai: 'さかない', ru: 'さく', ta: 'さいた', past_neg: 'さかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_76', type: 'verb1', base: 'すきます', kanji: '空きます', meaning: 'Vắng vẻ, Đói bụng', masu: 'すきます', te: 'すいて', nai: 'すかない', ru: 'すく', ta: 'すいた', past_neg: 'すかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_77', type: 'verb1', base: 'こみます', kanji: '混みます', meaning: 'Đông đúc', masu: 'こみます', te: 'こんで', nai: 'こまない', ru: 'こむ', ta: 'こんだ', past_neg: 'こまなかった', rule: 'Hàng み → んで / まない / む / んだ' },
+      { id: 'v1_78', type: 'verb1', base: 'おとします', kanji: '落とします', meaning: 'Làm rơi, Đánh rơi', masu: 'おとします', te: 'おとして', nai: 'おとさない', ru: 'おとす', ta: 'おとした', past_neg: 'おとさなかった', rule: 'Hàng し → して / さない / す / した' },
+      { id: 'v1_79', type: 'verb1', base: 'うごきます', kanji: '動きます', meaning: 'Chuyển động, Hoạt động', masu: 'うごきます', te: 'うごいて', nai: 'うごかない', ru: 'うごく', ta: 'うごいた', past_neg: 'うごかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+      { id: 'v1_80', type: 'verb1', base: 'はじまります', kanji: '始まります', meaning: 'Bắt đầu (tự động từ)', masu: 'はじまります', te: 'はじまって', nai: 'はじまらない', ru: 'はじまる', ta: 'はじまった', past_neg: 'はじまらなかった', rule: 'Hàng り → って / らない / る / った' },
+      { id: 'v1_81', type: 'verb1', base: 'つづきます', kanji: '続きます', meaning: 'Tiếp tục (tự động từ)', masu: 'つづきます', te: 'つづいて', nai: 'つづかない', ru: 'つづく', ta: 'つづいた', past_neg: 'つづかなかった', rule: 'Hàng き → いて / かない / く / いた' },
+
+      // --- ĐỘNG TỪ NHÓM 2 (Ichidan) ---
+      { id: 'v2_1', type: 'verb2', base: 'たべます', kanji: '食べます', meaning: 'Ăn', masu: 'たべます', te: 'たべて', nai: 'たべない', ru: 'たべる', ta: 'たべた', past_neg: 'たべなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_2', type: 'verb2', base: 'あけます', kanji: '開けます', meaning: 'Mở', masu: 'あけます', te: 'あけて', nai: 'あけない', ru: 'あける', ta: 'あけた', past_neg: 'あけなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_3', type: 'verb2', base: 'あつめます', kanji: '集めます', meaning: 'Thu thập, Sưu tầm', masu: 'あつめます', te: 'あつめて', nai: 'あつめない', ru: 'あつめる', ta: 'あつめた', past_neg: 'あつめなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_4', type: 'verb2', base: 'いれます', kanji: '入れます', meaning: 'Cho vào, Bỏ vào', masu: 'いれます', te: 'いれて', nai: 'いれない', ru: 'いれる', ta: 'いれた', past_neg: 'いれなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_5', type: 'verb2', base: 'あびます', kanji: '浴びます', meaning: 'Tắm (vòi sen)', masu: 'あびます', te: 'あびて', nai: 'あびない', ru: 'あびる', ta: 'あびた', past_neg: 'あびなかった', rule: 'ĐB Nhóm 2 hàng い: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_6', type: 'verb2', base: 'おしえます', kanji: '教えます', meaning: 'Dạy học, Chỉ dẫn', masu: 'おしえます', te: 'おしえて', nai: 'おしえない', ru: 'おしえる', ta: 'おしえた', past_neg: 'おしえなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_7', type: 'verb2', base: 'おぼえます', kanji: '覚えます', meaning: 'Ghi nhớ', masu: 'おぼえます', te: 'おぼえて', nai: 'おぼえない', ru: 'おぼえる', ta: 'おぼえた', past_neg: 'おぼえなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_8', type: 'verb2', base: 'つけます', kanji: '点けます / 付けます', meaning: 'Bật (đèn, điện)', masu: 'つけます', te: 'つけて', nai: 'つけない', ru: 'つける', ta: 'つけた', past_neg: 'つけなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_9', type: 'verb2', base: 'しめます', kanji: '閉めます', meaning: 'Đóng (cửa)', masu: 'しめます', te: 'しめて', nai: 'しめない', ru: 'しめる', ta: 'しめた', past_neg: 'しめなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_10', type: 'verb2', base: 'うまれます', kanji: '生まれます', meaning: 'Sinh ra', masu: 'うまれます', te: 'うまれて', nai: 'うまれない', ru: 'うまれる', ta: 'うまれた', past_neg: 'うまれなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_11', type: 'verb2', base: 'かります', kanji: '借ります', meaning: 'Vay, Mượn', masu: 'かります', te: 'かりて', nai: 'かりない', ru: 'かりる', ta: 'かりた', past_neg: 'かりなかった', rule: 'ĐB Nhóm 2 hàng い: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_12', type: 'verb2', base: 'たります', kanji: '足ります', meaning: 'Đầy đủ', masu: 'たります', te: 'たりて', nai: 'たりない', ru: 'たりる', ta: 'たりた', past_neg: 'たりなかった', rule: 'ĐB Nhóm 2 hàng い: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_13', type: 'verb2', base: 'おります', kanji: '降ります', meaning: 'Xuống (xe, tàu)', masu: 'おります', te: 'おりて', nai: 'おりない', ru: 'おりる', ta: 'おりた', past_neg: 'おりなかった', rule: 'ĐB Nhóm 2 hàng い: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_14', type: 'verb2', base: 'おきます', kanji: '起きます', meaning: 'Thức dậy', masu: 'おきます', te: 'おきて', nai: 'おきない', ru: 'おきる', ta: 'おきた', past_neg: 'おきなかった', rule: 'ĐB Nhóm 2 hàng い: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_15', type: 'verb2', base: 'でます', kanji: '出ます', meaning: 'Rời khỏi, Ra ngoài', masu: 'でます', te: 'でて', nai: 'でない', ru: 'でる', ta: 'でた', past_neg: 'でなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_16', type: 'verb2', base: 'やめます', kanji: '辞めます / 止めます', meaning: 'Nghỉ việc, Từ bỏ', masu: 'やめます', te: 'やめて', nai: 'やめない', ru: 'やめる', ta: 'やめた', past_neg: 'やめなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_17', type: 'verb2', base: 'みます', kanji: '見ます', meaning: 'Xem, Nhìn', masu: 'みます', te: 'みて', nai: 'みない', ru: 'みる', ta: 'みた', past_neg: 'みなかった', rule: 'ĐB Nhóm 2 hàng い: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_18', type: 'verb2', base: 'むかえます', kanji: '迎えます', meaning: 'Đón tiếp', masu: 'むかえます', te: 'むかえて', nai: 'むかえない', ru: 'むかえる', ta: 'むかえた', past_neg: 'むかえなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_19', type: 'verb2', base: 'わすれます', kanji: '忘れます', meaning: 'Quên', masu: 'わすれます', te: 'わすれて', nai: 'わすれない', ru: 'わすれる', ta: 'わすれた', past_neg: 'わすれなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_20', type: 'verb2', base: 'かえます', kanji: '変えます / 換えます', meaning: 'Thay đổi / Đổi tiền', masu: 'かえます', te: 'かえて', nai: 'かえない', ru: 'かえる', ta: 'かえた', past_neg: 'かえなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_21', type: 'verb2', base: 'しらべます', kanji: '調べます', meaning: 'Tra cứu, Tìm hiểu', masu: 'しらべます', te: 'しらべて', nai: 'しらべない', ru: 'しらべる', ta: 'しらべた', past_neg: 'しらべなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_22', type: 'verb2', base: 'ねます', kanji: '寝ます', meaning: 'Ngủ', masu: 'ねます', te: 'ねて', nai: 'ねない', ru: 'ねる', ta: 'ねた', past_neg: 'ねなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_23', type: 'verb2', base: 'みせます', kanji: '見せます', meaning: 'Cho xem', masu: 'みせます', te: 'みせて', nai: 'みせない', ru: 'みせる', ta: 'みせた', past_neg: 'みせなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_24', type: 'verb2', base: 'います', kanji: '居ます', meaning: 'Có, Ở (người, động vật)', masu: 'います', te: 'いて', nai: 'いない', ru: 'いる', ta: 'いた', past_neg: 'いなかった', rule: 'ĐB Nhóm 2 hàng い: Bỏ ます thêm て / ない / る / た' },
+      // --- BỔ SUNG 100% ĐỘNG TỪ NHÓM 2 N5 ---
+      { id: 'v2_25', type: 'verb2', base: 'あげます', kanji: '上げます / あげます', meaning: 'Cho, Tặng', masu: 'あげます', te: 'あげて', nai: 'あげない', ru: 'あげる', ta: 'あげた', past_neg: 'あげなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_26', type: 'verb2', base: 'つかれます', kanji: '疲れます', meaning: 'Mệt mỏi', masu: 'つかれます', te: 'つかれて', nai: 'つかれない', ru: 'つかれる', ta: 'つかれた', past_neg: 'つかれなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_27', type: 'verb2', base: 'かけます', kanji: '掛けます', meaning: 'Đeo (kính), Gọi (điện thoại)', masu: 'かけます', te: 'かけて', nai: 'かけない', ru: 'かける', ta: 'かけた', past_neg: 'かけなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_28', type: 'verb2', base: 'とめます', kanji: '止めます', meaning: 'Dừng, Đỗ xe', masu: 'とめます', te: 'とめて', nai: 'とめない', ru: 'とめる', ta: 'とめた', past_neg: 'とめなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_29', type: 'verb2', base: 'きめます', kanji: '決めます', meaning: 'Quyết định', masu: 'きめます', te: 'きめて', nai: 'きめない', ru: 'きめる', ta: 'きめた', past_neg: 'きめなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_30', type: 'verb2', base: 'ならべます', kanji: '並べます', meaning: 'Sắp xếp, Bày ra', masu: 'ならべます', te: 'ならべて', nai: 'ならべない', ru: 'ならべる', ta: 'ならべた', past_neg: 'ならべなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_31', type: 'verb2', base: 'おちます', kanji: '落ちます', meaning: 'Rơi, Rớt (tự động từ)', masu: 'おちます', te: 'おちて', nai: 'おちない', ru: 'おちる', ta: 'おちた', past_neg: 'おちなかった', rule: 'ĐB Nhóm 2 hàng い: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_32', type: 'verb2', base: 'つづけます', kanji: '続けます', meaning: 'Tiếp tục (tha động từ)', masu: 'つづけます', te: 'つづけて', nai: 'つづけない', ru: 'つづける', ta: 'つづけた', past_neg: 'つづけなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_33', type: 'verb2', base: 'すてます', kanji: '捨てます', meaning: 'Vứt rác, Bỏ đi', masu: 'すてます', te: 'すてて', nai: 'すてない', ru: 'すてる', ta: 'すてた', past_neg: 'すてなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_34', type: 'verb2', base: 'はじめます', kanji: '始めます', meaning: 'Bắt đầu (tha động từ)', masu: 'はじめます', te: 'はじめて', nai: 'はじめない', ru: 'はじめる', ta: 'はじめた', past_neg: 'はじめなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_35', type: 'verb2', base: 'こたえます', kanji: '答えます', meaning: 'Trả lời, Đáp lại', masu: 'こたえます', te: 'こたえて', nai: 'こたえない', ru: 'こたえる', ta: 'こたえた', past_neg: 'こたえなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+      { id: 'v2_36', type: 'verb2', base: 'おくれます', kanji: '遅れます', meaning: 'Trễ, Muộn (giờ)', masu: 'おくれます', te: 'おくれて', nai: 'おくれない', ru: 'おくれる', ta: 'おくれた', past_neg: 'おくれなかった', rule: 'Nhóm 2: Bỏ ます thêm て / ない / る / た' },
+
+      // --- ĐỘNG TỪ NHÓM 3 (Bất quy tắc / Suru) ---
+      { id: 'v3_1', type: 'verb3', base: 'べんきょうします', kanji: '勉強します', meaning: 'Học tập', masu: 'べんきょうします', te: 'べんきょうして', nai: 'べんきょうしない', ru: 'べんきょうする', ta: 'べんきょうした', past_neg: 'べんきょうしなかった', rule: 'Nhóm 3: します → して / しない / する / した' },
+      { id: 'v3_2', type: 'verb3', base: 'かいものします', kanji: '買い物します', meaning: 'Mua sắm', masu: 'かいものします', te: 'かいものして', nai: 'かいものしない', ru: 'かいものする', ta: 'かいものした', past_neg: 'かいものしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_3', type: 'verb3', base: 'きます', kanji: '来ます', meaning: 'Đến', masu: 'きます', te: 'きて', nai: 'こない', ru: 'くる', ta: 'きた', past_neg: 'こなかった', rule: 'Đặc biệt: きます → きて / こない / くる / きた' },
+      { id: 'v3_4', type: 'verb3', base: 'うんてんします', kanji: '運転します', meaning: 'Lái xe', masu: 'うんてんします', te: 'うんてんして', nai: 'うんてんしない', ru: 'うんてんする', ta: 'うんてんした', past_neg: 'うんてんしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_5', type: 'verb3', base: 'あんないします', kanji: '案内します', meaning: 'Hướng dẫn, Dẫn đường', masu: 'あんないします', te: 'あんないして', nai: 'あんないしない', ru: 'あんないする', ta: 'あんないした', past_neg: 'あんないしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_6', type: 'verb3', base: 'けんきゅうします', kanji: '研究します', meaning: 'Nghiên cứu', masu: 'けんきゅうします', te: 'けんきゅうして', nai: 'けんきゅうしない', ru: 'けんきゅうする', ta: 'けんきゅうした', past_neg: 'けんきゅうしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_7', type: 'verb3', base: 'ざんぎょうします', kanji: '残業します', meaning: 'Làm thêm giờ', masu: 'ざんぎょうします', te: 'ざんぎょうして', nai: 'ざんぎょうしない', ru: 'ざんぎょうする', ta: 'ざんぎょうした', past_neg: 'ざんぎょうしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_8', type: 'verb3', base: 'しょくじします', kanji: '食事します', meaning: 'Dùng bữa, Ăn cơm', masu: 'しょくじします', te: 'しょくじして', nai: 'しょくじしない', ru: 'しょくじする', ta: 'しょくじした', past_neg: 'しょくじしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_9', type: 'verb3', base: 'でんわします', kanji: '電話します', meaning: 'Gọi điện thoại', masu: 'でんわします', te: 'でんわして', nai: 'でんわしない', ru: 'でんわする', ta: 'でんわした', past_neg: 'でんわしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_10', type: 'verb3', base: 'します', kanji: '為ます', meaning: 'Làm', masu: 'します', te: 'して', nai: 'しない', ru: 'する', ta: 'した', past_neg: 'しなかった', rule: 'Nhóm 3: する' },
+      { id: 'v3_11', type: 'verb3', base: 'りゅうがくします', kanji: '留学します', meaning: 'Du học', masu: 'りゅうがくします', te: 'りゅうがくして', nai: 'りゅうがくしない', ru: 'りゅうがくする', ta: 'りゅうがくした', past_neg: 'りゅうがくしなかった', rule: 'Nhóm 3: します' },
+      // --- BỔ SUNG 100% ĐỘNG TỪ NHÓM 3 N5 ---
+      { id: 'v3_12', type: 'verb3', base: 'さんぽします', kanji: '散歩します', meaning: 'Đi dạo', masu: 'さんぽします', te: 'さんぽして', nai: 'さんぽしない', ru: 'さんぽする', ta: 'さんぽした', past_neg: 'さんぽしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_13', type: 'verb3', base: 'けっこんします', kanji: '結婚します', meaning: 'Kết hôn, Lập gia đình', masu: 'けっこんします', te: 'けっこんして', nai: 'けっこんしない', ru: 'けっこんする', ta: 'けっこんした', past_neg: 'けっこんしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_14', type: 'verb3', base: 'しんぱいします', kanji: '心配します', meaning: 'Lo lắng', masu: 'しんぱいします', te: 'しんぱいして', nai: 'しんぱいしない', ru: 'しんぱいする', ta: 'しんぱいした', past_neg: 'しんぱいしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_15', type: 'verb3', base: 'そうじします', kanji: '掃除します', meaning: 'Dọn dẹp vệ sinh', masu: 'そうじします', te: 'そうじして', nai: 'そうじしない', ru: 'そうじする', ta: 'そうじした', past_neg: 'そうじしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_16', type: 'verb3', base: 'せんたくします', kanji: '洗濯します', meaning: 'Giặt giũ quần áo', masu: 'せんたくします', te: 'せんたくして', nai: 'せんたくしない', ru: 'せんたくする', ta: 'せんたくした', past_neg: 'せんたくしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_17', type: 'verb3', base: 'れんしゅうします', kanji: '練習します', meaning: 'Luyện tập', masu: 'れんしゅうします', te: 'れんしゅうして', nai: 'れんしゅうしない', ru: 'れんしゅうする', ta: 'れんしゅうした', past_neg: 'れんしゅうしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_18', type: 'verb3', base: 'けんがくします', kanji: '見学します', meaning: 'Tham quan học tập', masu: 'けんがくします', te: 'けんがくして', nai: 'けんがくしない', ru: 'けんがくする', ta: 'けんがくした', past_neg: 'けんがくしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_19', type: 'verb3', base: 'コピーします', kanji: 'コピーします', meaning: 'Photo, Sao chép', masu: 'コピーします', te: 'コピーして', nai: 'コピーしない', ru: 'コピーする', ta: 'コピーした', past_neg: 'コピーしなかった', rule: 'Nhóm 3: します' },
+      { id: 'v3_20', type: 'verb3', base: 'よやくします', kanji: '予約します', meaning: 'Đặt trước, Hẹn trước', masu: 'よやくします', te: 'よやくして', nai: 'よやくしない', ru: 'よやくする', ta: 'よやくした', past_neg: 'よやくしなかった', rule: 'Nhóm 3: します' }
+    ];
+
+    // ==========================================
+    // 2. STATE MANAGEMENT & LOCAL STORAGE SESSION
+    // ==========================================
+    const SESSION_KEY = 'riki_n5_learning_session_v2';
+
+    let state = {
+      currentTab: 'flashcard',
+      currentCategory: 'all',
+      targetForm: 'random',
+      currentIndex: 0,
+      isFlipped: false,
+      streak: 0,
+      starredIds: [],
+      drill: {
+        correct: 0,
+        wrong: 0,
+        currentWord: null,
+        targetFormKey: 'te',
+        isAnswered: false
+      },
+      mc: {
+        currentWord: null,
+        targetFormKey: 'te',
+        choices: [],
+        correctIndex: 0,
+        answered: false,
+        count: 1
+      }
+    };
+
+    function loadSession() {
+      try {
+        const saved = localStorage.getItem(SESSION_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          state.currentCategory = parsed.currentCategory || 'all';
+          state.targetForm = parsed.targetForm || 'random';
+          state.currentIndex = parsed.currentIndex || 0;
+          state.streak = parsed.streak || 0;
+          state.starredIds = parsed.starredIds || [];
+          state.drill.correct = parsed.drillCorrect || 0;
+          state.drill.wrong = parsed.drillWrong || 0;
+        }
+      } catch (e) {
+        console.error('Could not load session:', e);
+      }
+    }
+
+    function saveSession() {
+      try {
+        localStorage.setItem(SESSION_KEY, JSON.stringify({
+          currentCategory: state.currentCategory,
+          targetForm: state.targetForm,
+          currentIndex: state.currentIndex,
+          streak: state.streak,
+          starredIds: state.starredIds,
+          drillCorrect: state.drill.correct,
+          drillWrong: state.drill.wrong
+        }));
+      } catch (e) {
+        console.error('Could not save session:', e);
+      }
+    }
+
+    function resetSession() {
+      if (confirm('Bạn có chắc muốn đặt lại toàn bộ tiến độ và điểm streak?')) {
+        state.currentIndex = 0;
+        state.streak = 0;
+        state.drill.correct = 0;
+        state.drill.wrong = 0;
+        saveSession();
+        updateHeaderBadges();
+        renderCurrentCard();
+        initDrillQuestion();
+        initMCQuestion();
+      }
+    }
+
+    // ==========================================
+    // 3. UTILITIES & HELPERS
+    // ==========================================
+    const FORM_LABELS = {
+      te: 'Thể て (V-te / A-te)',
+      nai: 'Thể ない (V-nai / Phủ định)',
+      ru: 'Thể る / Từ điển (V-ru / Thường)',
+      ta: 'Thể た (V-ta / Quá khứ)',
+      masu: 'Thể ます (V-masu / Lịch sự)',
+      past_neg: 'Thể Quá khứ Phủ định'
+    };
+
+    const TYPE_LABELS = {
+      verb1: 'Động từ Nhóm 1 (五段)',
+      verb2: 'Động từ Nhóm 2 (一段)',
+      verb3: 'Động từ Nhóm 3 (Bất quy tắc)',
+      adj_i: 'Tính từ đuôi い',
+      adj_na: 'Tính từ đuôi な',
+      noun: 'Danh từ (N)'
+    };
+
+    function getFilteredList() {
+      if (state.currentCategory === 'all') return VOCAB_DATA;
+      if (state.currentCategory === 'starred') {
+        return VOCAB_DATA.filter(item => state.starredIds.includes(item.id));
+      }
+      return VOCAB_DATA.filter(item => item.type === state.currentCategory);
+    }
+
+    function speakWord(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    function triggerConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 50,
+          spread: 60,
+          origin: { y: 0.7 }
+        });
+      }
+    }
+
+    // ==========================================
+    // 4. UI NAVIGATION & TABS
+    // ==========================================
+    function switchTab(tabId) {
+      state.currentTab = tabId;
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const activeEl = document.getElementById(`tab-${tabId}`);
+      if (activeEl) activeEl.classList.remove('hidden');
+
+      // Desktop Nav styles
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.className = 'nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 text-rose-100 hover:text-white hover:bg-rose-700/50';
+      });
+      const activeNav = document.getElementById(`nav-${tabId}`);
+      if (activeNav) {
+        activeNav.className = 'nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 bg-white text-rose-700 shadow-sm';
+      }
+
+      // Mobile Nav styles
+      document.querySelectorAll('.mob-nav-btn').forEach(btn => {
+        btn.className = 'mob-nav-btn flex flex-col items-center py-1 px-2 rounded-lg text-slate-500 font-medium text-xs';
+      });
+      const activeMobNav = document.getElementById(`mob-nav-${tabId}`);
+      if (activeMobNav) {
+        activeMobNav.className = 'mob-nav-btn flex flex-col items-center py-1 px-2 rounded-lg text-rose-600 font-bold text-xs';
+      }
+
+      // Initialize tab contents
+      if (tabId === 'flashcard') renderCurrentCard();
+      if (tabId === 'input-quiz') {
+        initDrillQuestion();
+        setTimeout(() => document.getElementById('drill-user-input')?.focus(), 150);
+      }
+      if (tabId === 'multi-quiz') initMCQuestion();
+      if (tabId === 'dictionary') renderDictionaryTable();
+    }
+
+    function setCategoryFilter(cat) {
+      state.currentCategory = cat;
+      state.currentIndex = 0;
+      saveSession();
+
+      // Update button highlights
+      document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+        btn.className = 'cat-filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600 transition';
+      });
+      const activeBtn = document.getElementById(`filter-${cat}`);
+      if (activeBtn) {
+        activeBtn.className = 'cat-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-rose-600 text-white shadow-sm transition';
+      }
+
+      renderCurrentCard();
+      initDrillQuestion();
+      initMCQuestion();
+      renderDictionaryTable();
+    }
+
+    function updateTargetForm(val) {
+      state.targetForm = val;
+      saveSession();
+      if (state.currentTab === 'input-quiz') initDrillQuestion();
+      if (state.currentTab === 'multi-quiz') initMCQuestion();
+    }
+
+    function updateHeaderBadges() {
+      // Total counts
+      const total = VOCAB_DATA.length;
+      document.getElementById('nav-total-count').innerText = total;
+      document.getElementById('count-all').innerText = total;
+      document.getElementById('count-verb1').innerText = VOCAB_DATA.filter(v => v.type === 'verb1').length;
+      document.getElementById('count-verb2').innerText = VOCAB_DATA.filter(v => v.type === 'verb2').length;
+      document.getElementById('count-verb3').innerText = VOCAB_DATA.filter(v => v.type === 'verb3').length;
+      document.getElementById('count-adj_i').innerText = VOCAB_DATA.filter(v => v.type === 'adj_i').length;
+      document.getElementById('count-adj_na').innerText = VOCAB_DATA.filter(v => v.type === 'adj_na').length;
+      document.getElementById('count-noun').innerText = VOCAB_DATA.filter(v => v.type === 'noun').length;
+      document.getElementById('count-starred').innerText = state.starredIds.length;
+
+      // Streak & Drill Scores
+      document.getElementById('streak-count').innerText = state.streak;
+      document.getElementById('drill-score-correct').innerText = state.drill.correct;
+      document.getElementById('drill-score-wrong').innerText = state.drill.wrong;
+    }
+
+    function toggleStarCurrent() {
+      const list = getFilteredList();
+      if (!list.length) return;
+      const current = list[state.currentIndex];
+      const idx = state.starredIds.indexOf(current.id);
+      if (idx > -1) {
+        state.starredIds.splice(idx, 1);
+      } else {
+        state.starredIds.push(current.id);
+      }
+      saveSession();
+      updateHeaderBadges();
+      renderCurrentCard();
+    }
+
+    // ==========================================
+    // 5. FLASHCARD LOGIC
+    // ==========================================
+    function renderCurrentCard() {
+      const list = getFilteredList();
+      if (list.length === 0) {
+        document.getElementById('card-front-jp').innerText = 'Trống';
+        document.getElementById('card-front-kanji').innerText = '';
+        document.getElementById('card-front-meaning').innerText = 'Không có từ nào trong danh mục này';
+        return;
+      }
+
+      if (state.currentIndex >= list.length) state.currentIndex = 0;
+      if (state.currentIndex < 0) state.currentIndex = list.length - 1;
+
+      const item = list[state.currentIndex];
+      
+      // Update UI Header
+      document.getElementById('card-category-badge').innerText = TYPE_LABELS[item.type] || 'Từ vựng';
+      document.getElementById('card-index-info').innerText = `Từ ${state.currentIndex + 1} / ${list.length}`;
+      
+      const percent = Math.round(((state.currentIndex + 1) / list.length) * 100);
+      document.getElementById('flashcard-progress-bar').style.width = `${percent}%`;
+
+      // Update Star Icon
+      const starBtn = document.getElementById('btn-star-current');
+      if (state.starredIds.includes(item.id)) {
+        starBtn.innerHTML = '<i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-500"></i>';
+      } else {
+        starBtn.innerHTML = '<i data-lucide="star" class="w-5 h-5 text-slate-400"></i>';
+      }
+
+      // Front
+      document.getElementById('card-front-jp').innerText = item.base;
+      document.getElementById('card-front-kanji').innerText = item.kanji !== item.base ? item.kanji : '';
+      document.getElementById('card-front-meaning').innerText = item.meaning;
+
+      // Back
+      document.getElementById('card-back-title').innerText = `${item.base} (${item.kanji})`;
+      document.getElementById('card-back-meaning').innerText = `Ý nghĩa: ${item.meaning} • ${TYPE_LABELS[item.type]}`;
+      document.getElementById('card-back-rule-tip').innerText = `💡 ${item.rule}`;
+
+      // Build Conjugation Matrix
+      const grid = document.getElementById('card-back-grid');
+      let gridHTML = `
+        <div class="p-2.5 rounded-xl bg-rose-50/80 border border-rose-100 flex flex-col justify-between">
+          <span class="text-[11px] font-bold text-rose-800 uppercase">Vます / Lịch sự</span>
+          <span class="text-base font-black font-jp text-rose-950">${item.masu}</span>
+        </div>
+        <div class="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-100 flex flex-col justify-between">
+          <span class="text-[11px] font-bold text-emerald-800 uppercase">Thể て (V-te)</span>
+          <span class="text-base font-black font-jp text-emerald-950">${item.te}</span>
+        </div>
+        <div class="p-2.5 rounded-xl bg-amber-50/80 border border-amber-100 flex flex-col justify-between">
+          <span class="text-[11px] font-bold text-amber-800 uppercase">Thể ない (Phủ định)</span>
+          <span class="text-base font-black font-jp text-amber-950">${item.nai}</span>
+        </div>
+        <div class="p-2.5 rounded-xl bg-sky-50/80 border border-sky-100 flex flex-col justify-between">
+          <span class="text-[11px] font-bold text-sky-800 uppercase">Thể る (Nguyên mẫu)</span>
+          <span class="text-base font-black font-jp text-sky-950">${item.ru}</span>
+        </div>
+        <div class="p-2.5 rounded-xl bg-purple-50/80 border border-purple-100 flex flex-col justify-between">
+          <span class="text-[11px] font-bold text-purple-800 uppercase">Thể た (Quá khứ)</span>
+          <span class="text-base font-black font-jp text-purple-950">${item.ta}</span>
+        </div>
+        <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 flex flex-col justify-between">
+          <span class="text-[11px] font-bold text-slate-700 uppercase">Quá khứ Phủ định</span>
+          <span class="text-base font-black font-jp text-slate-900">${item.past_neg}</span>
+        </div>
+      `;
+      grid.innerHTML = gridHTML;
+
+      // Reset flip state to front
+      state.isFlipped = false;
+      document.getElementById('card-front').classList.remove('hidden');
+      document.getElementById('card-back').classList.add('hidden');
+      
+      saveSession();
+      lucide.createIcons();
+    }
+
+    function flipFlashcard() {
+      state.isFlipped = !state.isFlipped;
+      if (state.isFlipped) {
+        document.getElementById('card-front').classList.add('hidden');
+        document.getElementById('card-back').classList.remove('hidden');
+        speakCurrentWord();
+      } else {
+        document.getElementById('card-front').classList.remove('hidden');
+        document.getElementById('card-back').classList.add('hidden');
+      }
+    }
+
+    function nextCard() {
+      const list = getFilteredList();
+      if (!list.length) return;
+      state.currentIndex = (state.currentIndex + 1) % list.length;
+      renderCurrentCard();
+    }
+
+    function prevCard() {
+      const list = getFilteredList();
+      if (!list.length) return;
+      state.currentIndex = (state.currentIndex - 1 + list.length) % list.length;
+      renderCurrentCard();
+    }
+
+    function speakCurrentWord() {
+      const list = getFilteredList();
+      if (!list.length) return;
+      speakWord(list[state.currentIndex].base);
+    }
+
+    // ==========================================
+    // 6. INPUT DRILL QUIZ LOGIC
+    // ==========================================
+    function initDrillQuestion() {
+      const list = getFilteredList();
+      if (!list.length) return;
+
+      const randomWord = list[Math.floor(Math.random() * list.length)];
+      state.drill.currentWord = randomWord;
+
+      // Determine target form
+      let forms = ['te', 'nai', 'ru', 'ta', 'masu', 'past_neg'];
+      if (state.targetForm !== 'random') {
+        state.drill.targetFormKey = state.targetForm;
+      } else {
+        state.drill.targetFormKey = forms[Math.floor(Math.random() * forms.length)];
+      }
+
+      state.drill.isAnswered = false;
+
+      // Update UI
+      document.getElementById('drill-category-badge').innerText = TYPE_LABELS[randomWord.type];
+      document.getElementById('drill-target-form-name').innerText = FORM_LABELS[state.drill.targetFormKey];
+      document.getElementById('drill-question-jp').innerText = randomWord.base;
+      document.getElementById('drill-question-kanji').innerHTML = `${randomWord.kanji} (<span class="text-rose-600 font-semibold">${randomWord.meaning}</span>)`;
+      
+      const input = document.getElementById('drill-user-input');
+      input.value = '';
+      input.className = 'w-full text-center text-2xl sm:text-3xl font-bold font-jp py-4 px-6 rounded-2xl border-2 border-slate-300 focus:border-rose-500 focus:ring-4 focus:ring-rose-100 focus:outline-none transition';
+      input.disabled = false;
+
+      document.getElementById('drill-feedback').classList.add('hidden');
+      document.getElementById('drill-hint-box').classList.add('hidden');
+      document.getElementById('drill-hint-text').innerText = randomWord.rule;
+      document.getElementById('btn-drill-submit').innerHTML = `<span>Kiểm tra đáp án</span><i data-lucide="arrow-right" class="w-5 h-5"></i>`;
+
+      lucide.createIcons();
+    }
+
+    function insertDrillChar(ch) {
+      const input = document.getElementById('drill-user-input');
+      input.value += ch;
+      input.focus();
+    }
+
+    function toggleHint() {
+      const hint = document.getElementById('drill-hint-box');
+      hint.classList.toggle('hidden');
+    }
+
+    function speakDrillPrompt() {
+      if (state.drill.currentWord) {
+        speakWord(state.drill.currentWord.base);
+      }
+    }
+
+    function submitDrillAnswer(e) {
+      if (e) e.preventDefault();
+      
+      if (state.drill.isAnswered) {
+        initDrillQuestion();
+        document.getElementById('drill-user-input').focus();
+        return;
+      }
+
+      const input = document.getElementById('drill-user-input');
+      const userRaw = input.value.trim();
+      if (!userRaw) return;
+
+      const userAns = (window.wanakana ? wanakana.toHiragana(userRaw) : userRaw).trim();
+      const current = state.drill.currentWord;
+      const expectedAns = current[state.drill.targetFormKey];
+
+      state.drill.isAnswered = true;
+      input.disabled = true;
+
+      const feedback = document.getElementById('drill-feedback');
+      const icon = document.getElementById('drill-feedback-icon');
+      const title = document.getElementById('drill-feedback-title');
+      const detail = document.getElementById('drill-feedback-detail');
+      const allForms = document.getElementById('drill-feedback-all-forms');
+      feedback.classList.remove('hidden');
+
+      const isCorrect = (userAns === expectedAns) || (userAns === current.base && state.drill.targetFormKey === 'masu');
+
+      if (isCorrect) {
+        state.streak++;
+        state.drill.correct++;
+        triggerConfetti();
+        speakWord(expectedAns);
+
+        feedback.className = 'mt-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900';
+        icon.className = 'w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5';
+        icon.innerHTML = '<i data-lucide="check" class="w-5 h-5"></i>';
+        title.innerText = `Chính xác! 🎉 Đáp án: ${expectedAns}`;
+        detail.innerText = `Quy tắc: ${current.rule}`;
+        input.className = 'w-full text-center text-2xl sm:text-3xl font-bold font-jp py-4 px-6 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 transition';
+      } else {
+        state.streak = 0;
+        state.drill.wrong++;
+
+        feedback.className = 'mt-6 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900';
+        icon.className = 'w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5';
+        icon.innerHTML = '<i data-lucide="x" class="w-5 h-5"></i>';
+        title.innerText = `Chưa đúng rồi! Đáp án đúng là: ${expectedAns}`;
+        detail.innerText = `Bạn đã gõ: "${userAns}" • ${current.rule}`;
+        input.className = 'w-full text-center text-2xl sm:text-3xl font-bold font-jp py-4 px-6 rounded-2xl border-2 border-rose-500 bg-rose-50 text-rose-900 transition';
+      }
+
+      allForms.innerHTML = `
+        <div class="bg-white/80 p-1.5 rounded-lg border">ます: <strong>${current.masu}</strong></div>
+        <div class="bg-white/80 p-1.5 rounded-lg border">て: <strong>${current.te}</strong></div>
+        <div class="bg-white/80 p-1.5 rounded-lg border">ない: <strong>${current.nai}</strong></div>
+        <div class="bg-white/80 p-1.5 rounded-lg border">る: <strong>${current.ru}</strong></div>
+        <div class="bg-white/80 p-1.5 rounded-lg border">た: <strong>${current.ta}</strong></div>
+        <div class="bg-white/80 p-1.5 rounded-lg border">Quá khứ Phủ: <strong>${current.past_neg}</strong></div>
+      `;
+
+      document.getElementById('btn-drill-submit').innerHTML = `<span>Tiếp theo (Enter)</span><i data-lucide="arrow-right" class="w-5 h-5"></i>`;
+
+      saveSession();
+      updateHeaderBadges();
+      lucide.createIcons();
+    }
+
+    function skipDrillQuestion() {
+      initDrillQuestion();
+    }
+
+    // ==========================================
+    // 7. MULTIPLE CHOICE QUIZ LOGIC
+    // ==========================================
+    function initMCQuestion() {
+      const list = getFilteredList();
+      if (!list.length) return;
+
+      const randomWord = list[Math.floor(Math.random() * list.length)];
+      state.mc.currentWord = randomWord;
+
+      let forms = ['te', 'nai', 'ru', 'ta', 'past_neg'];
+      if (state.targetForm !== 'random' && state.targetForm !== 'masu') {
+        state.mc.targetFormKey = state.targetForm;
+      } else {
+        state.mc.targetFormKey = forms[Math.floor(Math.random() * forms.length)];
+      }
+
+      state.mc.answered = false;
+      const correctAns = randomWord[state.mc.targetFormKey];
+
+      let choices = [correctAns];
+      forms.forEach(f => {
+        if (randomWord[f] && randomWord[f] !== correctAns && !choices.includes(randomWord[f])) {
+          choices.push(randomWord[f]);
+        }
+      });
+
+      while (choices.length < 4) {
+        const otherWord = list[Math.floor(Math.random() * list.length)];
+        const distractor = otherWord[state.mc.targetFormKey];
+        if (distractor && !choices.includes(distractor)) {
+          choices.push(distractor);
+        }
+      }
+
+      choices = choices.slice(0, 4);
+      choices.sort(() => Math.random() - 0.5);
+
+      state.mc.choices = choices;
+      state.mc.correctIndex = choices.indexOf(correctAns);
+
+      document.getElementById('mc-counter').innerText = state.mc.count;
+      document.getElementById('mc-target-badge').innerText = FORM_LABELS[state.mc.targetFormKey];
+      document.getElementById('mc-question-jp').innerText = randomWord.base;
+      document.getElementById('mc-question-meaning').innerText = `Nghĩa: ${randomWord.meaning} (${TYPE_LABELS[randomWord.type]})`;
+
+      const grid = document.getElementById('mc-options-grid');
+      grid.innerHTML = choices.map((choice, idx) => `
+        <button onclick="selectMCOption(${idx})" id="mc-opt-${idx}" class="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-rose-400 hover:bg-rose-50/50 font-jp font-bold text-xl text-slate-800 transition text-left flex items-center justify-between shadow-sm">
+          <span>${choice}</span>
+          <span class="w-6 h-6 rounded-full bg-slate-200 text-xs text-slate-600 flex items-center justify-center font-sans font-bold">${String.fromCharCode(65 + idx)}</span>
+        </button>
+      `).join('');
+
+      document.getElementById('mc-feedback').classList.add('hidden');
+      document.getElementById('btn-mc-next').classList.add('hidden');
+    }
+
+    function selectMCOption(idx) {
+      if (state.mc.answered) return;
+      state.mc.answered = true;
+
+      const isCorrect = (idx === state.mc.correctIndex);
+      const correctChoice = state.mc.choices[state.mc.correctIndex];
+
+      state.mc.choices.forEach((_, i) => {
+        const btn = document.getElementById(`mc-opt-${i}`);
+        if (i === state.mc.correctIndex) {
+          btn.className = 'p-4 rounded-2xl bg-emerald-500 border-2 border-emerald-600 text-white font-jp font-bold text-xl transition flex items-center justify-between shadow-md';
+        } else if (i === idx) {
+          btn.className = 'p-4 rounded-2xl bg-rose-500 border-2 border-rose-600 text-white font-jp font-bold text-xl transition flex items-center justify-between shadow-md';
+        } else {
+          btn.className = 'p-4 rounded-2xl bg-slate-100 border-2 border-slate-200 text-slate-400 font-jp font-medium text-xl opacity-60';
+        }
+      });
+
+      const feedback = document.getElementById('mc-feedback');
+      feedback.classList.remove('hidden');
+
+      if (isCorrect) {
+        state.streak++;
+        triggerConfetti();
+        speakWord(correctChoice);
+        feedback.className = 'p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-bold';
+        feedback.innerText = `🎉 Chuẩn xác! Đáp án đúng là: ${correctChoice}`;
+      } else {
+        state.streak = 0;
+        feedback.className = 'p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm font-bold';
+        feedback.innerText = `Chưa đúng! Đáp án đúng: ${correctChoice} (${state.mc.currentWord.rule})`;
+      }
+
+      document.getElementById('btn-mc-next').classList.remove('hidden');
+      saveSession();
+      updateHeaderBadges();
+    }
+
+    function nextMCQuestion() {
+      state.mc.count++;
+      initMCQuestion();
+    }
+
+    // ==========================================
+    // 8. DICTIONARY & CONJUGATION TABLE
+    // ==========================================
+    function renderDictionaryTable() {
+      filterDictionaryTable();
+    }
+
+    function filterDictionaryTable() {
+      const term = (document.getElementById('dict-search-input')?.value || '').toLowerCase().trim();
+      const list = getFilteredList();
+
+      const filtered = list.filter(item => {
+        if (!term) return true;
+        return item.base.toLowerCase().includes(term) ||
+               item.kanji.toLowerCase().includes(term) ||
+               item.meaning.toLowerCase().includes(term) ||
+               item.te.toLowerCase().includes(term) ||
+               item.nai.toLowerCase().includes(term) ||
+               item.ru.toLowerCase().includes(term) ||
+               item.ta.toLowerCase().includes(term);
+      });
+
+      const tbody = document.getElementById('dict-table-body');
+      if (!filtered.length) {
+        tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-slate-400">Không tìm thấy từ vựng phù hợp</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(item => `
+        <tr class="hover:bg-slate-50/80 transition">
+          <td class="p-3 border-b border-slate-100">
+            <div class="font-bold text-slate-800 font-jp text-base">${item.base}</div>
+            <div class="text-xs text-slate-400 font-jp">${item.kanji !== item.base ? item.kanji : ''}</div>
+            <div class="text-xs font-semibold text-rose-600 mt-0.5">${item.meaning}</div>
+          </td>
+          <td class="p-3 border-b border-slate-100">
+            <span class="px-2 py-0.5 rounded-full text-[11px] font-bold ${getBadgeColor(item.type)}">${TYPE_LABELS[item.type]}</span>
+          </td>
+          <td class="p-3 border-b border-slate-100 font-jp font-bold text-rose-700 bg-rose-50/30">${item.masu}</td>
+          <td class="p-3 border-b border-slate-100 font-jp font-bold text-emerald-700 bg-emerald-50/30">${item.te}</td>
+          <td class="p-3 border-b border-slate-100 font-jp font-bold text-amber-700 bg-amber-50/30">${item.nai}</td>
+          <td class="p-3 border-b border-slate-100 font-jp font-bold text-sky-700 bg-sky-50/30">${item.ru}</td>
+          <td class="p-3 border-b border-slate-100 font-jp font-bold text-purple-700 bg-purple-50/30">${item.ta}</td>
+          <td class="p-3 border-b border-slate-100 text-center">
+            <button onclick="speakWord('${item.base}')" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition" title="Nghe">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function getBadgeColor(type) {
+      switch (type) {
+        case 'verb1': return 'bg-rose-100 text-rose-800';
+        case 'verb2': return 'bg-emerald-100 text-emerald-800';
+        case 'verb3': return 'bg-purple-100 text-purple-800';
+        case 'adj_i': return 'bg-amber-100 text-amber-800';
+        case 'adj_na': return 'bg-sky-100 text-sky-800';
+        case 'noun': return 'bg-slate-200 text-slate-800';
+        default: return 'bg-slate-100 text-slate-700';
+      }
+    }
+
+    // ==========================================
+    // 9. GLOBAL KEYBOARD SHORTCUTS
+    // ==========================================
+    window.addEventListener('keydown', (e) => {
+      if (document.activeElement.tagName === 'INPUT') {
+        return;
+      }
+
+      if (state.currentTab === 'flashcard') {
+        if (e.code === 'Space') {
+          e.preventDefault();
+          flipFlashcard();
+        } else if (e.code === 'ArrowRight') {
+          nextCard();
+        } else if (e.code === 'ArrowLeft') {
+          prevCard();
+        }
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSession();
+      updateHeaderBadges();
+      switchTab('flashcard');
+
+      const drillInput = document.getElementById('drill-user-input');
+      if (drillInput && window.wanakana) {
+        wanakana.bind(drillInput, { IMEMode: true });
+      }
+    });
+  </script>
+</body>
+</html>
