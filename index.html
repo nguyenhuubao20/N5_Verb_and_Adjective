@@ -221,9 +221,10 @@
             <!-- CARD FRONT -->
             <div id="card-front" class="flex flex-col items-center justify-center flex-grow text-center">
               
-              <!-- Visual Icon / Image Representation Badge -->
-              <div id="card-front-icon" class="w-16 h-16 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-3xl mb-3 shadow-inner">
-                🚶
+              <!-- Visual Irasutoya Image / Icon Representation Badge -->
+              <div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-3 bg-rose-50/40 rounded-2xl p-2 border border-rose-100/80 shadow-inner flex items-center justify-center overflow-hidden">
+                <img id="card-front-img" src="" alt="Minh họa N5" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105 select-none" onerror="this.classList.add('hidden'); document.getElementById('card-front-icon').classList.remove('hidden');" />
+                <div id="card-front-icon" class="hidden text-5xl select-none">🚶</div>
               </div>
 
               <span id="card-front-prompt-badge" class="text-[11px] uppercase tracking-wider font-bold text-rose-600 mb-2 bg-rose-50 px-3 py-0.5 rounded-full border border-rose-100">
@@ -249,8 +250,9 @@
                 <!-- Back Header -->
                 <div class="flex items-start justify-between border-b border-slate-100 pb-3 mb-4">
                   <div class="flex items-center space-x-3">
-                    <div id="card-back-icon" class="w-12 h-12 rounded-xl bg-rose-50 border border-rose-100 flex items-center justify-center text-2xl shadow-inner flex-shrink-0">
-                      🚶
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-rose-50/60 border border-rose-100 p-1 flex items-center justify-center overflow-hidden shadow-inner flex-shrink-0">
+                      <img id="card-back-img" src="" alt="Minh họa N5" class="w-full h-full object-contain select-none" onerror="this.classList.add('hidden'); document.getElementById('card-back-icon').classList.remove('hidden');" />
+                      <div id="card-back-icon" class="hidden text-2xl select-none">🚶</div>
                     </div>
                     <div>
                       <span class="text-[10px] font-bold text-rose-600 uppercase bg-rose-50 px-2 py-0.5 rounded">Từ vựng thể ます</span>
@@ -344,7 +346,10 @@
 
           <!-- Prompt Question (Cho từ thể ます kèm hình icon minh họa) -->
           <div class="text-center my-3 bg-rose-50/50 border border-rose-100 rounded-2xl p-4">
-            <div id="drill-prompt-icon" class="text-3xl mb-1">🛒</div>
+            <div class="w-16 h-16 mx-auto mb-2 bg-white rounded-2xl border border-rose-100 p-1 flex items-center justify-center overflow-hidden shadow-sm">
+              <img id="drill-prompt-img" src="" alt="Minh họa N5" class="w-full h-full object-contain select-none" onerror="this.classList.add('hidden'); document.getElementById('drill-prompt-icon').classList.remove('hidden');" />
+              <div id="drill-prompt-icon" class="hidden text-3xl select-none">🛒</div>
+            </div>
             <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Từ gốc thể ます:</p>
             <div class="flex items-center justify-center space-x-2">
               <h2 id="drill-prompt-jp" class="text-3xl sm:text-4xl font-black text-slate-800 font-jp">
@@ -545,7 +550,10 @@
 
           <!-- Question Content -->
           <div class="text-center my-4">
-            <div id="mc-question-icon" class="text-3xl mb-1">🛒</div>
+            <div class="w-20 h-20 mx-auto mb-2 bg-slate-50 rounded-2xl border border-slate-200 p-1 flex items-center justify-center overflow-hidden shadow-sm">
+              <img id="mc-question-img" src="" alt="Minh họa N5" class="w-full h-full object-contain select-none" onerror="this.classList.add('hidden'); document.getElementById('mc-question-icon').classList.remove('hidden');" />
+              <div id="mc-question-icon" class="hidden text-3xl select-none">🛒</div>
+            </div>
             <span class="text-xs uppercase font-bold text-slate-400">Thể cần chọn:</span>
             <div id="mc-target-badge" class="inline-block bg-rose-50 text-rose-700 font-black px-3.5 py-1 rounded-full text-sm border border-rose-200 my-1.5">
               Thể ない (V-nai)
@@ -826,6 +834,95 @@
     ];
 
     // ==========================================
+    // 1.1 IRASUTOYA ILLUSTRATION IMAGE MAP (OFFICIAL JAPANESE STYLE)
+    // ==========================================
+    const IRASUTOYA_MAP = {
+      v1_1: 'https://1.bp.blogspot.com/-wE37F9zR0hU/UZmCW0q9F4I/AAAAAAAATrM/80Wb_7lXF2s/s400/walking_man.png',
+      v1_2: 'https://1.bp.blogspot.com/-D1fF9_jO5Y0/U312j_n3fUI/AAAAAAAAgyY/Ff6gL1g6w5c/s400/shopping_cart.png',
+      v1_3: 'https://3.bp.blogspot.com/-U9aG3T1p0g0/Vz8c7-45lSI/AAAAAAAA61k/vP6pMbgvYwYv2WqgUeYtH6j9O3J2vV2LgCLcB/s400/pen_man.png',
+      v1_4: 'https://3.bp.blogspot.com/-310fG790j-4/USNyF8g8vXI/AAAAAAAANAg/BwK6Z-b3dKk/s400/drink_water_man.png',
+      v1_5: 'https://2.bp.blogspot.com/-k8bW3C4_1YI/VQI5Gv-l0jI/AAAAAAAAsXk/o9C0iN1PZ3Y/s400/hasami_kami.png',
+      v1_6: 'https://4.bp.blogspot.com/-6Pq7E5I4J1w/UU-7F1w3tJI/AAAAAAAAOzQ/C7N_2E8Z9qE/s400/present_morau.png',
+      v1_7: 'https://1.bp.blogspot.com/-gZ0bF2k8bE0/Vf-2U_jV5bI/AAAAAAAAyYI/2X7H-xZ0U0U/s400/chair_sit_man.png',
+      v1_8: 'https://3.bp.blogspot.com/-F6F8i3u7w5k/WcZ4Y2Z0u7I/AAAAAAABG-4/q0N8t9R8u5k/s400/hirameki_man.png',
+      v1_9: 'https://4.bp.blogspot.com/-WlG7x0uE-fQ/UU-8bU9k_4I/AAAAAAAAO1c/G1vYm3G_9U8/s400/music_listen_man.png',
+      v1_10: 'https://4.bp.blogspot.com/-_N3H9E3G9b8/V8bW7V2_1JI/AAAAAAAA9aI/2U0k8X1n2_g/s400/money_kashikari.png',
+      v1_11: 'https://2.bp.blogspot.com/-aU3_d2bL5e4/VaE7kK3_8bI/AAAAAAAAvis/q-W1y5x3J4Y/s400/tetsudai_boy.png',
+      v1_12: 'https://1.bp.blogspot.com/-H3C1t2q9Y5k/V_u2f-4z-fI/AAAAAAAA_Zg/qJ6pG-3s5yU/s400/touch_button.png',
+      v1_13: 'https://3.bp.blogspot.com/-0h7z3JkY-1g/UZmCuE3hY1I/AAAAAAAATr0/x0l_5z6e5w8/s400/hotel_building.png',
+      v1_14: 'https://2.bp.blogspot.com/-5E3tY7a_z4s/V5N2eJ3k0bI/AAAAAAAA8iY/J2tV8qK1j-0/s400/camera_shashin_man.png',
+      v1_15: 'https://2.bp.blogspot.com/-gG3e9V2mN4o/Vf-4G2H-2dI/AAAAAAAAya4/o8o3F8g-4N4/s400/lesson_girl.png',
+      v1_16: 'https://2.bp.blogspot.com/-c8qH1Y2F3wU/VbH2t9-7n2I/AAAAAAAAwN0/Z2F7m-4_t0U/s400/kutsu_nugu.png',
+      v1_17: 'https://3.bp.blogspot.com/-o4p7g1t-9E8/UU-7V6-0YnI/AAAAAAAAOz4/c3u-q2w_8lY/s400/dokusyo_man.png',
+      v1_18: 'https://2.bp.blogspot.com/-6-0_uJ2K-cE/U7t3rG_1E4I/AAAAAAAAik0/G1m9F6y_4jI/s400/climbing_mountain.png',
+      v1_19: 'https://3.bp.blogspot.com/-z-8n3gL1t4g/UU-7L8n1H-I/AAAAAAAAOz8/gZ-1p0k0a4g/s400/train_man.png',
+      v1_20: 'https://1.bp.blogspot.com/-k8b_w2L-9cE/Vw8h2_0sV7I/AAAAAAAA5nE/J2_w0X_8qLs/s400/door_enter.png',
+      v1_21: 'https://3.bp.blogspot.com/-H3mN2G8F7qE/U7t3t8j0p6I/AAAAAAAAilE/V2L_7v0a7hA/s400/friends_meeting.png',
+      v1_22: 'https://4.bp.blogspot.com/-b6K2r8k0z5Y/UU-7X-7k_YI/AAAAAAAAO0M/V9s8w2b1p2s/s400/work_office_man.png',
+      v1_23: 'https://3.bp.blogspot.com/-K0k9f2_1lYI/VbH2m-4a3jI/AAAAAAAAwNk/4K8pL1f0m8s/s400/tearai_man.png',
+      v1_24: 'https://3.bp.blogspot.com/-_z8K2f5L-9Y/Vf-3_k8a3bI/AAAAAAAAyag/h3l9M2_1Y8w/s400/park_play_kids.png',
+      v1_25: 'https://2.bp.blogspot.com/-G2y7Y6t3_bI/UU-7R8a9W5I/AAAAAAAAO0A/e6F2_h9L7n4/s400/karaoke_sing_woman.png',
+      v1_26: 'https://2.bp.blogspot.com/-K8a3M2_h5wE/VbH2j2_1nJI/AAAAAAAAwNY/a3f_7l0m7Ns/s400/shop_seller_man.png',
+      v1_27: 'https://4.bp.blogspot.com/-_w2L_0mK1jE/V5N2k8a4b-I/AAAAAAAA8jI/L8n2f9m3_pY/s400/takuhai_box.png',
+      v1_28: 'https://1.bp.blogspot.com/-J2t7p8k0Y_Y/UU-7c8n2Y_I/AAAAAAAAO0c/k1w9v-3F0b8/s400/swimming_crawl_man.png',
+      v1_29: 'https://1.bp.blogspot.com/-y8W4k9F0_sE/Vf-3U2p1aJI/AAAAAAAAyZ0/b3X9h8j2L_A/s400/think_man.png',
+      v1_30: 'https://4.bp.blogspot.com/-r4p0M2b6Y_E/VbH2h1_1kJI/AAAAAAAAwNU/3J6s8h1p2b0/s400/boushi_man.png',
+      v1_31: 'https://2.bp.blogspot.com/-v8bM3L6h9kE/UU-8b_n2FwI/AAAAAAAAO1g/Z8h1m2p0wL8/s400/fight_pose_man.png',
+      v1_32: 'https://2.bp.blogspot.com/-y5L2v9m2_mY/VbH2q9_0s_I/AAAAAAAAwNs/k3F9v-1_L0w/s400/zubon_haku.png',
+      v1_33: 'https://3.bp.blogspot.com/-a6s9b0k3Y_E/V5N2m8a3hUI/AAAAAAAA8jQ/v6t0Y7l2_eI/s400/taxi_call_man.png',
+      v1_34: 'https://3.bp.blogspot.com/-F8n2h6Y1m0g/Vw8h4_9l-hI/AAAAAAAA5nU/G1w9v7k2_YI/s400/crossroad_right.png',
+      v1_35: 'https://4.bp.blogspot.com/-h2L8a4b0Y_Y/UU-7w_m3nVI/AAAAAAAAO08/0h3bL8k1_YI/s400/talk_two_people.png',
+      v1_36: 'https://3.bp.blogspot.com/-P1n8b0k4_hI/UU-7q2_1hUI/AAAAAAAAO00/L6p0X8m2_gY/s400/rain_umbrella_girl.png',
+      v1_37: 'https://1.bp.blogspot.com/-n8m3_b0k9LI/Vw8h7_8a4pI/AAAAAAAA5no/L3y9v1_p6Ks/s400/umbrella_carry.png',
+      v1_38: 'https://2.bp.blogspot.com/-F6b0m9k3_sE/V5N2o8_1bUI/AAAAAAAA8jY/0b9m6v4_1YI/s400/bag_carry_man.png',
+      v1_39: 'https://3.bp.blogspot.com/-r8b6v1_k8qE/Vf-4M2_1Y4I/AAAAAAAAybE/W2l8a4_p9Zs/s400/good_job_man.png',
+      v1_40: 'https://4.bp.blogspot.com/-h3K2L9m4v1E/UU-7U9_0pUI/AAAAAAAAOz0/y8b1M3k2_0w/s400/understood_man.png',
+      v2_1: 'https://3.bp.blogspot.com/-h0hT8_i7qUI/UZmCRQd9xXI/AAAAAAAATrA/fR3X3V37s2o/s400/syokuji_man.png',
+      v2_2: 'https://1.bp.blogspot.com/-s3L9n0k8b_w/Vw8h1_2s-bI/AAAAAAAA5nA/0h6v8b1_p3Y/s400/door_open.png',
+      v2_3: 'https://3.bp.blogspot.com/-k8b_v2L8_wE/VbH2r-1s2pI/AAAAAAAAwNw/G2l8a0_k1Ns/s400/collection_stamp.png',
+      v2_4: 'https://2.bp.blogspot.com/-F8n1m2_k8sE/Vw8h5_3k1pI/AAAAAAAA5nY/8b1M3L6h9kE/s400/box_put_in.png',
+      v2_5: 'https://4.bp.blogspot.com/-m6f4v9_1s3Y/UU-7k_8w2OI/AAAAAAAAO0s/k3F9v0_p4Ns/s400/shower_man.png',
+      v2_6: 'https://2.bp.blogspot.com/-L6b0m9k2_1E/UU-8S8_0s6I/AAAAAAAAO1Q/1m2p0wL8a4b/s400/teacher_sensei.png',
+      v2_7: 'https://3.bp.blogspot.com/-v8b6v0_k8qE/Vf-4G_2p1AI/AAAAAAAAya0/0b9m6v4_1YI/s400/memorize_note.png',
+      v2_8: 'https://1.bp.blogspot.com/-y8W4k9F0_sE/Vw8h6_7a3pI/AAAAAAAA5nc/L3y9v1_p6Ks/s400/denki_switch_on.png',
+      v2_9: 'https://2.bp.blogspot.com/-s3L9n0k8b_w/Vw8h2_0sV7I/AAAAAAAA5nE/J2_w0X_8qLs/s400/door_close.png',
+      v2_10: 'https://4.bp.blogspot.com/-h3K2L9m4v1E/UU-7e9_0pUI/AAAAAAAAO0g/y8b1M3k2_0w/s400/baby_born.png',
+      v2_11: 'https://1.bp.blogspot.com/-b6K2r8k0z5Y/UU-7m-7k_YI/AAAAAAAAO0w/V9s8w2b1p2s/s400/book_borrow_man.png',
+      v2_12: 'https://3.bp.blogspot.com/-o4p7g1t-9E8/UU-7X6-0YnI/AAAAAAAAO0E/c3u-q2w_8lY/s400/wake_up_morning.png',
+      v2_13: 'https://2.bp.blogspot.com/-6-0_uJ2K-cE/U7t3rG_1E4I/AAAAAAAAik0/G1m9F6y_4jI/s400/leaving_house.png',
+      v2_14: 'https://4.bp.blogspot.com/-_N3H9E3G9b8/V8bW7V2_1JI/AAAAAAAA9aI/2U0k8X1n2_g/s400/retire_work.png',
+      v2_15: 'https://1.bp.blogspot.com/-J2t7p8k0Y_Y/UU-7t8n2Y_I/AAAAAAAAO04/k1w9v-3F0b8/s400/tv_watch_family.png',
+      v2_16: 'https://3.bp.blogspot.com/-P1n8b0k4_hI/UU-7b2_1hUI/AAAAAAAAO0Y/L6p0X8m2_gY/s400/sleep_bed_man.png',
+      v3_1: 'https://2.bp.blogspot.com/-gG3e9V2mN4o/Vf-4G2H-2dI/AAAAAAAAya4/o8o3F8g-4N4/s400/study_desk_student.png',
+      v3_2: 'https://1.bp.blogspot.com/-D1fF9_jO5Y0/U312j_n3fUI/AAAAAAAAgyY/Ff6gL1g6w5c/s400/shopping_mall_family.png',
+      v3_3: 'https://3.bp.blogspot.com/-H3mN2G8F7qE/U7t3t8j0p6I/AAAAAAAAilE/V2L_7v0a7hA/s400/traveler_arrive.png',
+      v3_4: 'https://4.bp.blogspot.com/-r4p0M2b6Y_E/VbH2h1_1kJI/AAAAAAAAwNU/3J6s8h1p2b0/s400/car_drive_man.png',
+      v3_5: 'https://1.bp.blogspot.com/-wE37F9zR0hU/UZmCW0q9F4I/AAAAAAAATrM/80Wb_7lXF2s/s400/walking_dog_park.png',
+      v3_6: 'https://2.bp.blogspot.com/-G2y7Y6t3_bI/UU-7R8a9W5I/AAAAAAAAO0A/e6F2_h9L7n4/s400/wedding_couple.png',
+      v3_7: 'https://3.bp.blogspot.com/-K0k9f2_1lYI/VbH2m-4a3jI/AAAAAAAAwNk/4K8pL1f0m8s/s400/cleaning_room_man.png',
+      v3_8: 'https://2.bp.blogspot.com/-c8qH1Y2F3wU/VbH2t9-7n2I/AAAAAAAAwN0/Z2F7m-4_t0U/s400/laundry_wash.png',
+      v3_9: 'https://1.bp.blogspot.com/-J2t7p8k0Y_Y/UU-7c8n2Y_I/AAAAAAAAO0c/k1w9v-3F0b8/s400/soccer_kick_boy.png',
+      v3_10: 'https://4.bp.blogspot.com/-h2L8a4b0Y_Y/UU-7w_m3nVI/AAAAAAAAO08/0h3bL8k1_YI/s400/smartphone_call_man.png',
+      adj_i_1: 'https://3.bp.blogspot.com/-h0hT8_i7qUI/UZmCRQd9xXI/AAAAAAAATrA/fR3X3V37s2o/s400/delicious_ramen.png',
+      adj_i_2: 'https://4.bp.blogspot.com/-m6f4v9_1s3Y/UU-7k_8w2OI/AAAAAAAAO0s/k3F9v0_p4Ns/s400/cold_snow_man.png',
+      adj_i_3: 'https://3.bp.blogspot.com/-o4p7g1t-9E8/UU-7X6-0YnI/AAAAAAAAO0E/c3u-q2w_8lY/s400/hot_summer_sun.png',
+      adj_i_4: 'https://4.bp.blogspot.com/-_N3H9E3G9b8/V8bW7V2_1JI/AAAAAAAA9aI/2U0k8X1n2_g/s400/expensive_camera.png',
+      adj_i_5: 'https://2.bp.blogspot.com/-K8a3M2_h5wE/VbH2j2_1nJI/AAAAAAAAwNY/a3f_7l0m7Ns/s400/cheap_apple_sale.png',
+      adj_i_6: 'https://3.bp.blogspot.com/-r8b6v1_k8qE/Vf-4M2_1Y4I/AAAAAAAAybE/W2l8a4_p9Zs/s400/good_weather_sky.png',
+      adj_i_7: 'https://4.bp.blogspot.com/-r4p0M2b6Y_E/VbH2h1_1kJI/AAAAAAAAwNU/3J6s8h1p2b0/s400/new_car_shine.png',
+      adj_na_1: 'https://2.bp.blogspot.com/-G2y7Y6t3_bI/UU-7R8a9W5I/AAAAAAAAO0A/e6F2_h9L7n4/s400/beautiful_flower_garden.png',
+      adj_na_2: 'https://3.bp.blogspot.com/-0h7z3JkY-1g/UZmCuE3hY1I/AAAAAAAATr0/x0l_5z6e5w8/s400/famous_tokyo_tower.png',
+      adj_na_3: 'https://2.bp.blogspot.com/-aU3_d2bL5e4/VaE7kK3_8bI/AAAAAAAAvis/q-W1y5x3J4Y/s400/kind_helping_elderly.png',
+      noun_1: 'https://3.bp.blogspot.com/-r8b6v1_k8qE/Vf-4M2_1Y4I/AAAAAAAAybE/W2l8a4_p9Zs/s400/sunny_weather_sun.png'
+    };
+
+    VOCAB_DATA.forEach(item => {
+      if (IRASUTOYA_MAP[item.id]) {
+        item.img = IRASUTOYA_MAP[item.id];
+      }
+    });
+
+    // ==========================================
     // 2. STATE MANAGEMENT & SESSION
     // ==========================================
     const SESSION_KEY = 'riki_n5_learning_session_v5';
@@ -1066,10 +1163,33 @@
         starBtn.innerHTML = '<i data-lucide="star" class="w-4 h-4 text-slate-400"></i>';
       }
 
-      // Visual Icon
+      // Visual Irasutoya Image & Fallback Icon
       const icon = item.icon || '📘';
-      document.getElementById('card-front-icon').innerText = icon;
-      document.getElementById('card-back-icon').innerText = icon;
+      const img = item.img || '';
+
+      const frontImg = document.getElementById('card-front-img');
+      const frontIcon = document.getElementById('card-front-icon');
+      if (img) {
+        frontImg.src = img;
+        frontImg.classList.remove('hidden');
+        frontIcon.classList.add('hidden');
+      } else {
+        frontImg.classList.add('hidden');
+        frontIcon.classList.remove('hidden');
+      }
+      frontIcon.innerText = icon;
+
+      const backImg = document.getElementById('card-back-img');
+      const backIcon = document.getElementById('card-back-icon');
+      if (img) {
+        backImg.src = img;
+        backImg.classList.remove('hidden');
+        backIcon.classList.add('hidden');
+      } else {
+        backImg.classList.add('hidden');
+        backIcon.classList.remove('hidden');
+      }
+      backIcon.innerText = icon;
 
       // Render Front based on Mode
       if (state.flashcardMode === 'jp_first') {
@@ -1152,7 +1272,19 @@
 
       // Update Header & Prompt
       document.getElementById('drill-category-badge').innerText = TYPE_LABELS[randomWord.type];
-      document.getElementById('drill-prompt-icon').innerText = randomWord.icon || '📝';
+      
+      const drillImg = document.getElementById('drill-prompt-img');
+      const drillIcon = document.getElementById('drill-prompt-icon');
+      if (randomWord.img) {
+        drillImg.src = randomWord.img;
+        drillImg.classList.remove('hidden');
+        drillIcon.classList.add('hidden');
+      } else {
+        drillImg.classList.add('hidden');
+        drillIcon.classList.remove('hidden');
+      }
+      drillIcon.innerText = randomWord.icon || '📝';
+
       document.getElementById('drill-prompt-jp').innerText = randomWord.masu || randomWord.base;
       document.getElementById('drill-prompt-kanji').innerText = (randomWord.kanji && randomWord.kanji !== randomWord.base) ? randomWord.kanji : '';
       document.getElementById('drill-prompt-meaning').innerText = randomWord.meaning;
@@ -1309,7 +1441,19 @@
       state.mc.correctIndex = choices.indexOf(correctAns);
 
       document.getElementById('mc-counter').innerText = state.mc.count;
-      document.getElementById('mc-question-icon').innerText = randomWord.icon || '📝';
+
+      const mcImg = document.getElementById('mc-question-img');
+      const mcIcon = document.getElementById('mc-question-icon');
+      if (randomWord.img) {
+        mcImg.src = randomWord.img;
+        mcImg.classList.remove('hidden');
+        mcIcon.classList.add('hidden');
+      } else {
+        mcImg.classList.add('hidden');
+        mcIcon.classList.remove('hidden');
+      }
+      mcIcon.innerText = randomWord.icon || '📝';
+
       document.getElementById('mc-target-badge').innerText = `Thể ${state.mc.targetFormKey.toUpperCase()}`;
       document.getElementById('mc-question-jp').innerText = randomWord.masu || randomWord.base;
       document.getElementById('mc-question-meaning').innerText = `Nghĩa: ${randomWord.meaning} (${TYPE_LABELS[randomWord.type]})`;
@@ -1400,8 +1544,10 @@
       tbody.innerHTML = filtered.map(item => `
         <tr class="hover:bg-slate-50/80 transition">
           <td class="p-2.5 border-b border-slate-100">
-            <div class="flex items-center space-x-1.5">
-              <span class="text-base">${item.icon || '📘'}</span>
+            <div class="flex items-center space-x-2">
+              <div class="w-9 h-9 rounded-lg bg-rose-50/50 border border-rose-100 p-0.5 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-2xs">
+                <img src="${item.img || ''}" alt="" class="w-full h-full object-contain select-none" onerror="this.outerHTML='<span class=\"text-base\">${item.icon || '📘'}</span>'" />
+              </div>
               <div>
                 <div class="font-bold text-slate-800 font-jp text-sm">${item.base}</div>
                 <div class="text-[11px] text-slate-400 font-jp">${item.kanji !== item.base ? item.kanji : ''}</div>
